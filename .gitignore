@@ -1,0 +1,7 @@
+# Fichiers système
+.DS_Store
+
+# Outillage local (skill Impeccable) — config/cache spécifiques à la machine,
+# pas du contenu du site
+.claude/
+.impeccable/

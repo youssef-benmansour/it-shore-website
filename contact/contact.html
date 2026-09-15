@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Contactez IT Shore - Experts en développement web, mobile, intégration ERP, IA générative et transformation digitale depuis 2011.">
+    <title>IT Shore - Démarrons la discussion</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>
+        /* Styles supplémentaires pour la page contact */
+        .contact-section {
+            padding: 120px 0 80px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .contact-form-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-heading {
+            margin-bottom: 30px;
+        }
+
+        .contact-heading h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .contact-subheading {
+            color: var(--dark-gray);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .contact-method {
+            margin-bottom: 30px;
+        }
+
+        .contact-method h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(148, 167, 80, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--btn-green);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background-color: var(--btn-green);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(148, 167, 80, 0.25);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .form-check-label {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            line-height: 1.5;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            padding: 14px 30px;
+            background-color: var(--btn-green);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--btn-green-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(148, 167, 80, 0.35);
+        }
+
+        .form-helper {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .contact-map {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-faq {
+            background-color: var(--white);
+            padding: 80px 0;
+        }
+
+        .contact-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+            flex: 1 0 calc(50% - 10px);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(148, 167, 80, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--btn-green);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .benefit-content p {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            line-height: 1.5;
+        }
+
+        .timeline-section {
+            padding-top: 0;
+        }
+
+        .contact-timeline-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-timeline-title h2 {
+            font-size: 2.2rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-timeline-title p {
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Témoignages spécifiques à la page contact */
+        .contact-testimonials {
+            background-color: rgba(148, 167, 80, 0.06);
+            padding: 60px 0;
+            margin-top: 80px;
+        }
+
+        .contact-testimonial-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .contact-testimonial-card::before {
+            content: '\201C';
+            font-size: 4rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: rgba(148, 167, 80, 0.18);
+            font-family: serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                order: 2;
+            }
+
+            .contact-form-container {
+                order: 1;
+                margin-bottom: 40px;
+            }
+
+            .benefit-item {
+                flex: 1 0 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        /* Animation pour la page de succès */
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .success-checkmark .check-icon {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            border-radius: 50%;
+            box-sizing: content-box;
+            border: 4px solid var(--secondary-color);
+        }
+
+        .success-checkmark .check-icon::before {
+            top: 3px;
+            left: -2px;
+            width: 30px;
+            transform-origin: 100% 50%;
+            border-radius: 100px 0 0 100px;
+        }
+
+        .success-checkmark .check-icon::after {
+            top: 0;
+            left: 30px;
+            width: 60px;
+            transform-origin: 0 50%;
+            border-radius: 0 100px 100px 0;
+            animation: rotate-circle 4.25s ease-in;
+        }
+
+        .success-checkmark .check-icon::before, .success-checkmark .check-icon::after {
+            content: '';
+            height: 100px;
+            position: absolute;
+            background: var(--white);
+            transform: rotate(-45deg);
+        }
+
+        .success-checkmark .check-icon .icon-line {
+            height: 5px;
+            background-color: var(--secondary-color);
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+        }
+
+        .success-checkmark .check-icon .icon-line.line-tip {
+            top: 46px;
+            left: 14px;
+            width: 25px;
+            transform: rotate(45deg);
+            animation: icon-line-tip 0.75s;
+        }
+
+        .success-checkmark .check-icon .icon-line.line-long {
+            top: 38px;
+            right: 8px;
+            width: 47px;
+            transform: rotate(-45deg);
+            animation: icon-line-long 0.75s;
+        }
+
+        .success-checkmark .check-icon .icon-circle {
+            top: -4px;
+            left: -4px;
+            z-index: 10;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            box-sizing: content-box;
+            border: 4px solid rgba(148, 167, 80, 0.5);
+        }
+
+        .success-checkmark .check-icon .icon-fix {
+            top: 8px;
+            width: 5px;
+            left: 26px;
+            z-index: 1;
+            height: 85px;
+            position: absolute;
+            transform: rotate(-45deg);
+            background-color: var(--white);
+        }
+
+        @keyframes rotate-circle {
+            0% {
+                transform: rotate(-45deg);
+            }
+            5% {
+                transform: rotate(-45deg);
+            }
+            12% {
+                transform: rotate(-405deg);
+            }
+            100% {
+                transform: rotate(-405deg);
+            }
+        }
+
+        @keyframes icon-line-tip {
+            0% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            54% {
+                width: 0;
+                left: 1px;
+                top: 19px;
+            }
+            70% {
+                width: 50px;
+                left: -8px;
+                top: 37px;
+            }
+            84% {
+                width: 17px;
+                left: 21px;
+                top: 48px;
+            }
+            100% {
+                width: 25px;
+                left: 14px;
+                top: 45px;
+            }
+        }
+
+        @keyframes icon-line-long {
+            0% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            65% {
+                width: 0;
+                right: 46px;
+                top: 54px;
+            }
+            84% {
+                width: 55px;
+                right: 0px;
+                top: 35px;
+            }
+            100% {
+                width: 47px;
+                right: 8px;
+                top: 38px;
+            }
+        }
+        
+        .form-submitted {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+        
+        .form-submitted h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .form-submitted p {
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+        }
+        
+        .success-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header avec menu de navigation -->
+    <div class="header-blur-mask" aria-hidden="true"></div>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../itshore_logo.jpeg" alt="IT Shore Logo">
+                    </a>
+                </div>
+
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="../ia/parlons-ia.html" class="nav-highlight">Parlons IA</a></li>
+                        <li class="dropdown">
+                            <a href="../index.html#expertises" class="dropdown-toggle">Expertises <i class="fas fa-chevron-down dropdown-caret" aria-hidden="true"></i></a>
+                            <div class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-code" aria-hidden="true"></i></span>
+                                            <h4>Développement Produit</h4>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">Développement Web</span></li>
+                                            <li><span class="mega-menu-item">Développement Mobile</span></li>
+                                            <li><span class="mega-menu-item">Reprise de code</span></li>
+                                            <li><span class="mega-menu-item">Audit d'applications</span></li>
+                                            <li><span class="mega-menu-item">Applications SaaS</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></span>
+                                            <h4>Intégrateur ERP</h4>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">Intégrateur Odoo</span></li>
+                                            <li><span class="mega-menu-item">Audit ERP</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-robot" aria-hidden="true"></i></span>
+                                            <h4>Data & AI</h4>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">IA Générative</span></li>
+                                            <li><span class="mega-menu-item">Systèmes prédictifs</span></li>
+                                            <li><span class="mega-menu-item">Data Engineering</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-compass" aria-hidden="true"></i></span>
+                                            <h4>Conseil & Transformation</h4>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">Transformation digitale</span></li>
+                                            <li><span class="mega-menu-item">Conseil IT & Infrastructure</span></li>
+                                            <li><span class="mega-menu-item">Formations</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="../index.html#methode">Méthode</a></li>
+                        <li><a href="../index.html#temoignages">Témoignages</a></li>
+                    </ul>
+                </nav>
+
+                <div class="cta-button">
+                    <a href="https://calendly.com/it-shore/discutons-de-votre-projet-30min" target="_blank" rel="noopener" class="btn-primary">Démarrer la discussion</a>
+                </div>
+
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section principale de contact -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-form-container">
+                <form id="contactForm" class="contact-form">
+                    <h2>Parlons de votre projet</h2>
+                    <p class="contact-subheading">Remplissez le formulaire ci-dessous et nous vous recontacterons dans les 24 heures pour discuter de vos besoins.</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">Prénom *</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Nom *</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company" class="form-label">Entreprise</label>
+                        <input type="text" id="company" name="company" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectType" class="form-label">Type de projet *</label>
+                        <select id="projectType" name="projectType" class="form-control" required>
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="web">Développement Web</option>
+                            <option value="mobile">Développement Mobile</option>
+                            <option value="erp">Intégration ERP</option>
+                            <option value="ai">IA & Data</option>
+                            <option value="conseil">Conseil & Transformation</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">Votre projet en quelques mots *</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget" class="form-label">Budget estimé</label>
+                        <select id="budget" name="budget" class="form-control">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="small">< 50 000 DH</option>
+                            <option value="medium">50 000 DH - 150 000 DH</option>
+                            <option value="large">150 000 DH - 300 000 DH</option>
+                            <option value="enterprise">> 300 000 DH</option>
+                            <option value="unknown">Je ne sais pas encore</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="privacy" name="privacy" class="form-check-input" required>
+                        <label for="privacy" class="form-check-label">J'accepte la <a href="politique-confidentialite.html">politique de confidentialité</a> et le traitement de mes données personnelles *</label>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Envoyer ma demande</button>
+                    
+                    <p class="form-helper">* Champs obligatoires</p>
+                </form>
+                
+                <!-- Message de confirmation (affiché après soumission) -->
+                <div id="formSuccess" class="form-submitted">
+                    <div class="success-checkmark">
+                        <div class="check-icon">
+                            <span class="icon-line line-tip"></span>
+                            <span class="icon-line line-long"></span>
+                            <div class="icon-circle"></div>
+                            <div class="icon-fix"></div>
+                        </div>
+                    </div>
+                    <h3>Merci pour votre demande !</h3>
+                    <p>Nous avons bien reçu votre message et vous recontacterons dans les meilleurs délais, généralement sous 24 heures ouvrées.</p>
+                    <div class="success-actions">
+                        <a href="../index.html" class="btn-secondary">Retour à l'accueil</a>
+                        <a href="references.html" class="btn-primary">Voir nos références</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-heading">
+                    <h2>Discutons de vos enjeux</h2>
+                    <p class="contact-subheading">Besoin d'un éclairage sur vos projets digitaux ? Notre équipe d'experts est à votre disposition pour échanger et vous apporter des solutions adaptées à vos besoins.</p>
+                </div>
+                
+                <div class="contact-method">
+                    <h3>Nous contacter</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <a href="mailto:contact@itshore.fr">contact@itshore.fr</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p>75 Avenue des Champs-Élysées<br>75008 Paris, France</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-benefits">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Écoute personnalisée</h4>
+                            <p>Nous prenons le temps de comprendre vos besoins spécifiques avant de proposer des solutions.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Réponse rapide</h4>
+                            <p>Notre équipe vous recontacte sous 24h pour échanger sur votre projet.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Experts dédiés</h4>
+                            <p>Des consultants spécialisés dans votre secteur d'activité vous accompagnent.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="benefit-content">
+                            <h4>Sans engagement</h4>
+                            <p>Premier échange gratuit et sans obligation pour évaluer la faisabilité de votre projet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section timeline - Comment ça marche -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="contact-timeline-title reveal">
+                <h2>Comment se déroule votre projet avec IT Shore ?</h2>
+                <p>Notre approche structurée vous garantit un développement optimal de votre projet digital</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>1. Consultation initiale</h3>
+                        <p>Nous échangeons sur vos besoins, objectifs et contraintes pour bien comprendre votre projet et ses enjeux.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2. Proposition détaillée</h3>
+                        <p>Notre équipe vous présente une solution technique adaptée, un planning prévisionnel et un devis transparent.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-delay="400">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>3. Développement agile</h3>
+                        <p>Nos experts réalisent votre projet par itérations avec des points réguliers pour garantir l'alignement avec vos attentes.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-delay="600">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>4. Livraison et support</h3>
+                        <p>Après les tests finaux, nous déployons votre solution et vous formons à son utilisation. Notre équipe reste disponible pour vous accompagner.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section FAQ -->
+    <section class="contact-faq">
+        <div class="container">
+            <h2 class="section-title reveal">Questions fréquemment posées</h2>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quel est le délai de réponse après l'envoi de ma demande ?</h3>
+                        <div class="toggle-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous nous engageons à vous répondre dans un délai maximum de 24 heures ouvrées. Un consultant spécialisé vous contactera pour discuter plus en détail de votre projet et de vos besoins.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment se déroule le premier rendez-vous ?</h3>
+                        <div class="toggle-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Le premier rendez-vous peut se tenir en visioconférence ou dans nos locaux selon votre préférence. Il dure environ 45 minutes et nous permet d'explorer ensemble votre projet, vos objectifs business et vos contraintes techniques. Ce premier échange est gratuit et sans engagement.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Dois-je déjà avoir un cahier des charges précis ?</h3>
+                        <div class="toggle-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Non, ce n'est pas nécessaire. Nous pouvons vous accompagner dès la phase de conception et vous aider à formaliser vos besoins. Notre méthodologie inclut une phase d'analyse qui permet de clarifier et structurer votre projet, même si votre idée n'est qu'à l'état d'ébauche.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment estimez-vous le budget d'un projet ?</h3>
+                        <div class="toggle-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Le budget est calculé en fonction de plusieurs facteurs : complexité technique, nombre de fonctionnalités, délais de réalisation, technologies utilisées, etc. Après notre premier échange, nous vous fournirons une estimation détaillée et transparente. Nous pouvons également adapter la solution à votre budget en proposant différentes options ou un développement par phases.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quelles informations dois-je préparer avant notre premier contact ?</h3>
+                        <div class="toggle-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour rendre notre premier échange plus efficace, il est utile de réfléchir à vos objectifs business, à vos utilisateurs cibles, aux fonctionnalités essentielles que vous souhaitez intégrer, et si possible, à des exemples de solutions existantes qui vous inspirent. Mais ne vous inquiétez pas, nous vous guiderons avec les bonnes questions lors de notre entretien.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Proposez-vous un accompagnement après la livraison du projet ?</h3>
+                        <div class="toggle-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, nous proposons différentes formules de maintenance et d'évolution pour assurer la pérennité de votre solution. Cela inclut la correction des bugs, les mises à jour de sécurité, l'optimisation des performances et l'ajout de nouvelles fonctionnalités. Nous vous formons également à l'utilisation de votre solution pour vous donner un maximum d'autonomie.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section témoignages clients -->
+    <section class="contact-testimonials">
+        <div class="container">
+            <h2 class="section-title reveal">Ce que nos clients disent de notre accompagnement</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-column reveal">
+                    <div class="contact-testimonial-card">
+                        <p>"L'équipe d'IT Shore a parfaitement compris notre problématique dès le premier rendez-vous. La qualité de leur écoute et leur capacité à synthétiser nos besoins nous ont impressionnés. Le projet a été livré dans les délais et correspond exactement à nos attentes."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Philippe Martin</h4>
+                                <span>Directeur Commercial, SophiaTech</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-column reveal" data-delay="200">
+                    <div class="contact-testimonial-card">
+                        <p>"Nous avions un projet complexe d'intégration ERP que plusieurs prestataires avaient refusé. IT Shore a non seulement accepté le défi mais a proposé une solution innovante qui a simplifié nos processus. Leur accompagnement a été précieux à chaque étape."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Sylvie Dubois</h4>
+                                <span>Directrice Financière, IndustriaPlus</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-column reveal" data-delay="400">
+                    <div class="contact-testimonial-card">
+                        <p>"Le processus de prise de contact et de suivi a été fluide et professionnel du début à la fin. Contrairement à d'autres prestataires, IT Shore a pris le temps de comprendre notre métier avant de proposer des solutions. Cela a fait toute la différence dans la qualité du résultat final."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Marc Lefebvre</h4>
+                                <span>CEO, NutriSanté</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section CTA finale -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2>Prêt à donner vie à votre projet digital ?</h2>
+                <p>Notre équipe est impatiente de collaborer avec vous pour transformer vos idées en solutions concrètes et performantes.</p>
+                <a href="#contactForm" class="btn-primary smooth-scroll">Démarrer maintenant</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 IT Shore. Tous droits réservés.</p>
+                </div>
+                <div class="legal-links">
+                    <a href="politique-confidentialite.html">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Gestion du formulaire de contact
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const formSuccess = document.getElementById('formSuccess');
+            
+            // Validation et soumission du formulaire
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Vérification des champs requis
+                const required = contactForm.querySelectorAll('[required]');
+                let isValid = true;
+                
+                required.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error');
+                    } else {
+                        field.classList.remove('error');
+                    }
+                });
+                
+                // Si formulaire valide, simuler l'envoi et afficher le message de confirmation
+                if (isValid) {
+                    // Animation de chargement
+                    const submitBtn = contactForm.querySelector('.btn-submit');
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                    submitBtn.disabled = true;
+                    
+                    // Simuler un délai d'envoi (à remplacer par l'envoi réel au serveur)
+                    setTimeout(() => {
+                        contactForm.style.display = 'none';
+                        formSuccess.style.display = 'block';
+                        
+                        // Scroll jusqu'au message de confirmation
+                        formSuccess.scrollIntoView({ behavior: 'smooth' });
+                    }, 150);
+                }
+            });
+            
+            // Smooth scroll pour les liens d'ancrage
+            document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Animation pour les champs du formulaire
+            const formInputs = document.querySelectorAll('.form-control');
+            
+            formInputs.forEach(input => {
+                // Animation au focus
+                input.addEventListener('focus', () => {
+                    input.parentElement.classList.add('focused');
+                });
+                
+                // Animation à la perte de focus
+                input.addEventListener('blur', () => {
+                    if (!input.value.trim()) {
+                        input.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                // Vérifier si le champ a déjà une valeur au chargement
+                if (input.value.trim()) {
+                    input.parentElement.classList.add('focused');
+                }
+            });
+            
+            // Initialisation des FAQ
+            initFaq();
+            
+            // Observer pour les animations au scroll
+            initScrollReveal();
+        });
+        
+        // Fonction pour la FAQ (reprise du code du site principal)
+        function initFaq() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            if (!faqItems.length) return;
+            
+            // S'assurer que tous les éléments FAQ sont fermés au chargement
+            faqItems.forEach(item => {
+                item.classList.remove('active');
+                
+                const question = item.querySelector('.faq-question');
+                const toggleIcon = question.querySelector('.toggle-icon');
+                
+                if (toggleIcon) {
+                    toggleIcon.innerHTML = '<i class="fas fa-plus"></i>';
+                }
+            });
+            
+            // Ajouter les écouteurs d'événements de clic
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Vérifier si cet élément est déjà actif
+                    const isActive = item.classList.contains('active');
+                    
+                    if (isActive) {
+                        // S'il est actif, le fermer
+                        item.classList.remove('active');
+                        
+                        // Changer l'icône pour plus
+                        const toggleIcon = question.querySelector('.toggle-icon');
+                        if (toggleIcon) {
+                            toggleIcon.innerHTML = '<i class="fas fa-plus"></i>';
+                        }
+                    } else {
+                        // Fermer d'abord tous les autres éléments
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                                
+                                // Réinitialiser les autres icônes en plus
+                                const otherToggle = otherItem.querySelector('.toggle-icon');
+                                if (otherToggle) {
+                                    otherToggle.innerHTML = '<i class="fas fa-plus"></i>';
+                                }
+                            }
+                        });
+                        
+                        // Ouvrir cet élément
+                        item.classList.add('active');
+                        
+                        // Changer l'icône en moins
+                        const toggleIcon = question.querySelector('.toggle-icon');
+                        if (toggleIcon) {
+                            toggleIcon.innerHTML = '<i class="fas fa-minus"></i>';
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Fonction pour les animations au défilement
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            if (!revealElements.length) return;
+            
+            const handleRevealIntersection = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const delay = element.getAttribute('data-delay') || 0;
+                        
+                        setTimeout(() => {
+                            element.classList.add('active');
+                        }, delay);
+                        
+                        observer.unobserve(element);
+                    }
+                });
+            };
+            
+            const options = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(handleRevealIntersection, options);
+            revealElements.forEach(element => observer.observe(element));
+        }
+    </script>
+</body>
+
+</html>

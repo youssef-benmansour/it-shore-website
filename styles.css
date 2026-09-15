@@ -1,0 +1,2126 @@
+/* Base styles et réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Pas de scroll-behavior: smooth ici — il rendrait animée toute correction de
+   scroll involontaire du navigateur au chargement (restauration de position,
+   reflow de police), ce qui se voit comme un saut vers le bas puis un retour
+   en haut. Les ancres de nav utilisent déjà behavior:'smooth' en JS (main.js),
+   ce qui suffit et reste sous notre contrôle. */
+
+:root {
+    --primary-color: #313131;
+    --primary-dark: #404142;
+    --secondary-color: #94a750;
+    --secondary-light: rgba(148, 167, 80, 0.1);
+    --btn-green: #5f7a2e;
+    --btn-green-dark: #4c6225;
+    --text-color: #000000;
+    --light-gray: #f5f5f5;
+    --medium-gray: #e0e0e0;
+    --dark-gray: #353535;
+    --white: #ffffff;
+    --shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background-color: #f9f9f9;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+.section-title {
+    font-size: 2.0rem;
+    font-weight: 400;
+    margin-bottom: 35px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--secondary-color);
+    margin: 10px auto 0;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: -20px auto 35px;
+    font-size: 1.2rem;
+    color: var(--dark-gray);
+}
+
+section {
+    padding: 30px 0;
+    scroll-margin-top: 100px;
+}
+
+/* Boutons */
+.btn-primary {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: var(--btn-green);
+    color: var(--white);
+    border-radius: 4px;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 2px solid var(--btn-green);
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-green-dark);
+    border-color: var(--btn-green-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(148, 167, 80, 0.35);
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: transparent;
+    color: var(--btn-green);
+    border: 2px solid var(--btn-green);
+    border-radius: 4px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background-color: var(--btn-green);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(148, 167, 80, 0.35);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+    outline: 2px solid var(--btn-green-dark);
+    outline-offset: 2px;
+}
+
+/* Header et Navigation */
+/* Le flou de la capsule ne couvrait que sa propre forme — le contenu qui
+   défile de part et d'autre (hors de la pilule mais dans la même bande
+   horizontale) restait net, ce qui créait une coupure visible. Ce calque
+   pleine largeur, positionné juste sous le header, floute toute la bande du
+   haut et s'estompe en dégradé vers le bas plutôt que de s'arrêter net. */
+.header-blur-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 112px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* Barre flottante, pas de bord à bord : décollée du haut et des côtés,
+   plafonnée en largeur, capsule pleinement arrondie (radius clampé à la
+   moitié de la hauteur). Fond translucide + backdrop-filter : le contenu qui
+   défile dessous se floute au lieu de simplement disparaître derrière un
+   aplat opaque. Bordure teintée Report Green à faible opacité (pas du gris
+   neutre) pour rester dans la palette. "scrolled" la resserre légèrement
+   vers le haut et creuse l'ombre plutôt que de changer sa forme. */
+.header {
+    position: fixed;
+    top: 26px;
+    left: 16px;
+    right: 16px;
+    max-width: 1180px;
+    margin: 0 auto;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(95, 122, 46, 0.16);
+    border-radius: 999px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
+    transition: top 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header .container {
+    padding: 0 30px;
+}
+
+.header.scrolled {
+    top: 26px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 68px;
+}
+
+.logo {
+    height: 40px;
+    transition: var(--transition);
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-list li {
+    position: relative;
+}
+
+.nav-list a {
+    font-weight: 500;
+    padding: 8px 0;
+    position: relative;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.nav-list a:hover::after,
+.nav-list a.active::after {
+    width: 100%;
+}
+
+.nav-list a.nav-highlight {
+    color: var(--btn-green);
+}
+
+/* "Expertises" est le seul déclencheur cliquable de tout le bloc : même
+   langage de survol que les autres liens de nav (soulignement + couleur),
+   pas de fond qui apparaît — la puce/chevron suffit à le distinguer comme
+   déclencheur de menu sans inventer un deuxième langage de survol. */
+.dropdown:hover .dropdown-toggle,
+.dropdown:focus-within .dropdown-toggle {
+    color: var(--btn-green);
+}
+
+/* Menu déroulant / Mega menu */
+.dropdown {
+    position: relative;
+}
+
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
+    border-radius: 16px;
+    padding: 22px 8px;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 100;
+    width: 720px;
+    max-width: calc(100vw - 40px);
+    margin-top: 20px;
+}
+
+.dropdown:hover .mega-menu,
+.dropdown:focus-within .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 14px;
+}
+
+.dropdown-caret {
+    font-size: 0.7em;
+    margin-left: 5px;
+    transition: var(--transition);
+}
+
+.dropdown:hover .dropdown-caret,
+.dropdown:focus-within .dropdown-caret {
+    transform: rotate(180deg);
+}
+
+.mega-menu::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 14px;
+    height: 14px;
+    background-color: var(--white);
+    border-radius: 3px 0 0 0;
+    box-shadow: -3px -3px 6px rgba(0, 0, 0, 0.03);
+}
+
+.mega-menu-content {
+    display: flex;
+    width: 100%;
+}
+
+.mega-menu-column {
+    flex: 1;
+    padding: 0 16px;
+}
+
+.mega-menu-column + .mega-menu-column {
+    border-left: 1px solid var(--medium-gray);
+}
+
+.mega-menu-column-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.mega-menu-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--secondary-light);
+    color: var(--btn-green);
+    font-size: 0.7rem;
+}
+
+.mega-menu-column h4,
+.mega-menu-column .mega-menu-heading {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.mega-menu-column ul li {
+    margin-bottom: 2px;
+}
+
+/* Les intitulés d'expertise ne sont pas cliquables : texte plat, curseur par
+   défaut, aucune réaction au survol — l'opposé délibéré du traitement pilule
+   d'"Expertises", pour qu'il n'y ait aucune ambiguïté sur ce qui mène
+   quelque part et ce qui ne fait qu'illustrer le menu. */
+.mega-menu-item {
+    display: block;
+    padding: 4px 4px;
+    color: var(--dark-gray);
+    font-weight: 400;
+    font-size: 0.85rem;
+    cursor: default;
+    user-select: none;
+}
+
+/* CTA Button */
+.cta-button {
+    margin-left: 30px;
+}
+
+/* Le CTA générique (.btn-primary) est dimensionné pour vivre seul dans une
+   section ; dans la capsule de 68px, à taille réelle il déborde visuellement
+   du reste du contenu. Réduit ici uniquement, pas sur .btn-primary lui-même. */
+.cta-button .btn-primary {
+    padding: 9px 20px;
+    font-size: 0.9rem;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    width: 30px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle:focus-visible {
+    outline: 2px solid var(--btn-green-dark);
+    outline-offset: 2px;
+}
+
+.mobile-menu-toggle span {
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-color);
+    margin-bottom: 5px;
+    transition: var(--transition);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 112px;
+    padding-bottom: 60px;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-image: url('images/hero-pattern.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 80px;
+    padding-top: 50px;
+}
+
+.hero-content {
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+    margin-top: 50px;
+}
+
+/* Défilement des problèmes, un par un, dans le hero */
+.hero-problems-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin-right: 10px;
+    margin-top: 50px;
+    justify-self: end;
+}
+
+.hero-problems-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/* "Résolution en direct" : le problème se barre puis cède sa place à la
+   solution dans le même emplacement (empilement grid), plutôt que deux
+   lignes fixes reliées par une flèche. Le compteur et la barre de
+   progression donnent un statut visible du rythme (heuristique #1). */
+.hero-problems {
+    position: relative;
+    background-color: var(--white);
+    border: 1px solid var(--medium-gray);
+    border-top: 4px solid var(--btn-green);
+    border-radius: 14px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 22px;
+    padding: 30px 24px 24px;
+}
+
+.hero-problems-counter {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+    color: var(--dark-gray);
+}
+
+.hero-problems-counter-current {
+    color: var(--btn-green);
+}
+
+/* Hauteur fixe et calée sur le pire cas (2 lignes de texte) : le panneau ne
+   bouge jamais quand le texte change, qu'il tienne sur une ligne ou deux. */
+.hero-problem-stage {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    height: 116px;
+}
+
+.hero-problem-line {
+    grid-row: 1;
+    grid-column: 1;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-problem-icon {
+    flex-shrink: 0;
+    font-size: 1.15rem;
+}
+
+.hero-problem-line-problem {
+    opacity: 1;
+    transform: translateY(0);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-color);
+    line-height: 1.6;
+    text-decoration-line: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: transparent;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), text-decoration-color 0.4s ease;
+}
+
+.hero-problem-line-problem .hero-problem-icon {
+    color: var(--dark-gray);
+}
+
+.hero-problem-line-solution {
+    opacity: 0;
+    transform: translateY(8px);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--btn-green);
+    line-height: 1.6;
+}
+
+.hero-problem-line-solution .hero-problem-icon {
+    color: var(--btn-green);
+}
+
+.hero-problem-stage.stage-struck .hero-problem-line-problem {
+    text-decoration-color: var(--dark-gray);
+}
+
+.hero-problem-stage.stage-solved .hero-problem-line-problem {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+.hero-problem-stage.stage-solved .hero-problem-line-solution {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-problems-progress {
+    height: 3px;
+    border-radius: 4px;
+    background-color: var(--medium-gray);
+    overflow: hidden;
+}
+
+.hero-problems-progress-bar {
+    height: 100%;
+    width: 100%;
+    background-color: var(--btn-green);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: hero-progress-fill 9s linear;
+}
+
+@keyframes hero-progress-fill {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.hero-problems:hover .hero-problems-progress-bar {
+    animation-play-state: paused;
+}
+
+@media (max-width: 992px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        padding-left: 0;
+        padding-right: 0;
+        gap: 36px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-problems-wrap {
+        max-width: 420px;
+        margin: 0 auto;
+        justify-self: center;
+    }
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: var(--dark-gray);
+}
+
+.hero-cta {
+    display: flex;
+    gap: 20px;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.mouse {
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--dark-gray);
+    border-radius: 20px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background-color: var(--primary-color);
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: scroll-wheel 1.5s infinite;
+}
+
+@keyframes scroll-wheel {
+    0% {
+        opacity: 1;
+        top: 10px;
+    }
+    100% {
+        opacity: 0;
+        top: 30px;
+    }
+}
+
+.arrow {
+    margin-top: 10px;
+}
+
+.arrow span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid var(--dark-gray);
+    border-right: 2px solid var(--dark-gray);
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: arrow 1.5s infinite;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.arrow span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes arrow {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px, -20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px, 20px);
+    }
+}
+
+/* Schéma animé : Audit -> Identification -> Build -> Monitoring */
+/* "Le rail" : un seul chemin continu que le dossier remonte, pas cinq
+   cercles isolés reliés par des flèches. Le remplissage du rail EST la
+   narration (audit -> monitoring), pas une décoration à côté d'elle. */
+.process-diagram {
+    margin-top: 110px;
+    position: relative;
+    z-index: 1;
+}
+
+.diagram-track {
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.diagram-rail {
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background-color: var(--medium-gray);
+    z-index: 0;
+}
+
+.diagram-rail-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--btn-green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.diagram-steps {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.diagram-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.diagram-node-marker {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    border: 2px solid var(--medium-gray);
+    background-color: var(--white);
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.diagram-node-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    text-align: center;
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Étapes déjà passées : marqueur plein vert, taille normale (l'étape
+   courante seule grossit — voir la règle suivante). */
+.diagram-node.reached .diagram-node-marker {
+    background-color: var(--btn-green);
+    border-color: var(--btn-green);
+    color: var(--white);
+}
+
+.diagram-node.reached .diagram-node-label {
+    color: var(--btn-green);
+}
+
+.diagram-node.active .diagram-node-marker,
+.diagram-node:hover .diagram-node-marker {
+    background-color: var(--btn-green);
+    border-color: var(--btn-green);
+    color: var(--white);
+    transform: scale(1.15);
+}
+
+.diagram-node.active .diagram-node-label,
+.diagram-node:hover .diagram-node-label {
+    color: var(--btn-green);
+}
+
+.diagram-node:focus-visible .diagram-node-marker {
+    outline: 2px solid var(--btn-green-dark);
+    outline-offset: 2px;
+}
+
+/* Empilement grid, comme le Hero Problem Resolver : une seule ligne active
+   à la fois, crossfade au lieu d'un instant hidden/visible. */
+.diagram-description {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    margin-top: 46px;
+    min-height: 3.7rem;
+}
+
+.diagram-description-text {
+    grid-row: 1;
+    grid-column: 1;
+    max-width: 640px;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--btn-green);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.diagram-description-text.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+    .diagram-rail {
+        top: 0;
+        left: 19px;
+        right: auto;
+        width: 2px;
+        height: 100%;
+    }
+
+    /* Le remplissage horizontal ne se transpose pas proprement à la verticale
+       sans dupliquer la logique JS pour un gain visuel marginal ici — chaque
+       repère garde simplement sa propre mise en avant au survol/actif. */
+    .diagram-rail-fill {
+        display: none;
+    }
+
+    .diagram-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        max-width: 320px;
+    }
+
+    .diagram-node {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        align-self: stretch;
+    }
+
+    .diagram-node-marker {
+        flex-shrink: 0;
+    }
+}
+
+/* Widget de réservation Calendly */
+.calendly-embed-wrap {
+    margin: 40px auto 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* Approche / Timeline Section */
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    --timeline-progress: 0%;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background-color: rgba(148, 167, 80, 0.2);
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: var(--timeline-progress);
+    background-color: var(--btn-green);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--white);
+    border: 4px solid var(--medium-gray);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-dot.reached {
+    background-color: var(--btn-green);
+    border-color: var(--btn-green);
+}
+
+.timeline-item:hover .timeline-dot {
+    box-shadow: 0 4px 12px rgba(148, 167, 80, 0.5);
+}
+
+.timeline-content {
+    position: relative;
+    width: 45%;
+    padding: 30px;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-left: auto;
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--btn-green);
+}
+
+.timeline-content p {
+    color: var(--text-color);
+}
+
+/* Recent Projects Section — galerie horizontale, défilable à la souris */
+.recent-projects {
+    overflow: hidden;
+}
+
+/* Le titre reste centré comme sur toutes les autres sections ; les flèches
+   de navigation passent sous le titre plutôt que de le pousser à gauche
+   dans un flex space-between. */
+.projects-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projects-nav {
+    display: flex;
+    gap: 10px;
+    margin-top: -15px;
+}
+
+.projects-nav-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--medium-gray);
+    background-color: var(--white);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.projects-nav-btn:hover {
+    background-color: var(--btn-green);
+    border-color: var(--btn-green);
+    color: var(--white);
+}
+
+.projects-scroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 36px 20px 28px;
+    margin-top: 10px;
+    cursor: grab;
+    scrollbar-width: none;
+}
+
+.projects-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.projects-scroll.dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+}
+
+/* Cartes "dossier" : pas de fausse photo à la place d'une image qu'on n'a
+   pas encore — le placeholder assumé, c'est la structure même de la carte
+   (numéro de dossier, secteurs, icône), dans l'esprit "Field Report". */
+.project-card-v2 {
+    position: relative;
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--white);
+    border: 1px solid var(--medium-gray);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card-v2:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.project-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.project-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--btn-green);
+    background-color: var(--white);
+    border: 1px solid rgba(95, 122, 46, 0.3);
+    padding: 5px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.project-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--secondary-light);
+    color: var(--btn-green);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card-v2:hover .project-icon {
+    background-color: var(--btn-green);
+    color: var(--white);
+}
+
+.project-info-v2 {
+    padding: 22px 20px 4px;
+    flex: 1;
+}
+
+.project-info-v2 h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+
+.project-info-v2 p {
+    color: var(--dark-gray);
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.project-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 14px 20px 20px;
+    color: var(--btn-green);
+    font-weight: 600;
+    font-size: 0.88rem;
+}
+
+.project-link i {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-link:hover i {
+    transform: translate(2px, -2px);
+}
+
+.tag {
+    background-color: var(--secondary-light);
+    color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.projects-progress {
+    height: 3px;
+    max-width: 220px;
+    margin: 6px auto 0;
+    background-color: var(--medium-gray);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.projects-progress-bar {
+    height: 100%;
+    width: 100%;
+    background-color: var(--btn-green);
+    transform: scaleX(0.15);
+    transform-origin: left;
+    transition: transform 0.15s ease;
+}
+
+@media (max-width: 576px) {
+    .project-card-v2 {
+        flex-basis: 280px;
+    }
+}
+
+/* Témoignages Section */
+.testimonials .section-title {
+    color: var(--text-color);
+}
+
+.testimonials .section-title::after {
+    background-color: var(--secondary-color);
+}
+
+/* .testimonial-grid / .testimonial-column / .testimonial-author / .author-info
+   stay here for contact.html's .contact-testimonial-card, which still uses
+   them — index.html's homepage testimonials moved to the spotlight pattern
+   below and no longer use .testimonial-card. */
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.testimonial-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.author-info h3,
+.author-info h4 {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: var(--primary-dark);
+}
+
+.author-info span {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+/* Section témoignages (homepage) : "Mur" de citations sur deux rangées qui
+   défilent en continu en sens opposés — pas le carrousel Spotlight+Index
+   d'avant, et volontairement distinct du simple carrousel de logos clients
+   (deux rangées contraires, cartes riches en contenu, pause au survol pour
+   laisser le temps de lire). Chaque rangée déborde pleine largeur du
+   viewport (au lieu de rester dans le .container) pour un vrai effet de mur,
+   pas une simple bande de plus dans une page déjà pleine de bandes. */
+.testimonials {
+    overflow: hidden;
+}
+
+.testimonial-wall {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.testimonial-wall-row {
+    overflow: hidden;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.testimonial-wall-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    padding: 4px 20px;
+    animation: testimonial-wall-scroll 46s linear infinite;
+}
+
+.testimonial-wall-row-b .testimonial-wall-track {
+    animation-direction: reverse;
+    animation-duration: 54s;
+}
+
+.testimonial-wall-row:hover .testimonial-wall-track {
+    animation-play-state: paused;
+}
+
+@keyframes testimonial-wall-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.testimonial-wall-card {
+    flex: 0 0 340px;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 28px 26px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-wall-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-wall-mark {
+    display: block;
+    font-size: 1.3rem;
+    color: rgba(148, 167, 80, 0.35);
+    margin-bottom: 12px;
+}
+
+.testimonial-wall-card p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.testimonial-wall-author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 16px;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.testimonial-wall-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--primary-dark);
+}
+
+.testimonial-wall-company {
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonial-wall-track {
+        animation: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-wall-card {
+        flex: 0 0 280px;
+    }
+}
+
+/* Section clients (logos défilants) */
+
+.clients-slider {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.clients-track {
+    display: flex;
+    animation: scroll 30s linear infinite;
+    width: calc(200px * 16); /* Largeur x nombre total de logos (original + répétition) */
+}
+
+.client-logo {
+    width: 180px;
+    height: 100px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-logo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--medium-gray);
+    border-radius: 8px;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    font-size: 1.8rem;
+    transition: var(--transition);
+}
+
+.client-logo:hover .client-logo-placeholder {
+    border-color: var(--btn-green);
+    border-style: solid;
+    background-color: var(--secondary-light);
+    color: var(--btn-green);
+    transform: scale(1.05);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-200px * 8)); /* Largeur x nombre de logos originaux */
+    }
+}
+
+/* Section FAQ */
+.faq {
+    padding: 70px 0;
+}
+
+.faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* "Le registre" : chaque question porte une référence (Q01...) comme les
+   dossiers projets et les repères du Rail — même vocabulaire numéroté que
+   le reste du système, plutôt qu'une liste FAQ interchangeable. */
+.faq-item {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background-color: var(--white);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    background-color: var(--white);
+    border: none;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-number {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--btn-green);
+    background-color: var(--secondary-light);
+    padding: 4px 11px;
+    border-radius: 999px;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-question h3 {
+    flex: 1;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toggle-icon {
+    flex-shrink: 0;
+    color: var(--btn-green);
+    font-size: 1.1rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Un seul chevron qui pivote plutôt que deux icônes (+ / −) permutées
+   instantanément dans le DOM — l'ouverture se voit, elle ne "saute" pas. */
+.faq-item.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-number {
+    background-color: var(--btn-green);
+    color: var(--white);
+}
+
+/* Critical for hiding answers by default.
+   grid-template-rows 0fr -> 1fr avoids animating max-height against an
+   arbitrary cap and keeps the layout cost to one track, not a reflow chain. */
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    padding: 0 30px;
+    opacity: 0;
+    transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
+}
+
+.faq-answer > p {
+    overflow: hidden;
+    margin: 0;
+}
+
+.faq-item.active .faq-answer {
+    grid-template-rows: 1fr;
+    padding: 10px 30px 20px;
+    opacity: 1;
+}
+
+.faq-item.active .faq-question {
+    background-color: var(--secondary-light);
+}
+
+.faq-question:focus-visible {
+    outline: 2px solid var(--btn-green);
+    outline-offset: -2px;
+}
+
+.faq-item.active .faq-question h3 {
+    color: var(--primary-color);
+}
+
+.faq-answer p {
+    color: var(--dark-gray);
+    line-height: 1.7;
+}
+
+/* Media Queries pour les nouvelles sections */
+@media (max-width: 1200px) {
+    .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .testimonial-column:last-child {
+        grid-column: span 2;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonial-column:last-child {
+        grid-column: span 1;
+    }
+    
+    .clients-track {
+        animation-duration: 20s;
+    }
+    
+    .faq-question h3 {
+        font-size: 1rem;
+    }
+}
+
+/* Section expertises (homepage #expertises) : "Spotlight + Index" — un pôle
+   affiché en détail à la fois (grand, avec tags et exemple concret) et un
+   index compact des 4 autres pour naviguer, plutôt que 4 cases identiques
+   d'un coup — le même principe de hiérarchie que les témoignages. */
+.expertise-section {
+    padding: 30px 0 70px;
+}
+
+.expertise-spotlight {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 50px;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.expertise-spotlight-main {
+    position: relative;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 44px 40px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.expertise-spotlight-main.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.expertise-spotlight:hover .expertise-spotlight-main {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.expertise-spotlight-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.expertise-spotlight-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--secondary-light);
+    color: var(--btn-green);
+    font-size: 1.1rem;
+}
+
+.expertise-spotlight-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.expertise-spotlight-desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--dark-gray);
+    margin-bottom: 24px;
+}
+
+.expertise-spotlight-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.expertise-spotlight-example {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--dark-gray);
+    padding-top: 20px;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.expertise-spotlight-example strong {
+    color: var(--primary-color);
+}
+
+.expertise-spotlight-example a {
+    color: var(--btn-green);
+    font-weight: 600;
+}
+
+.expertise-index {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.expertise-index-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.expertise-index-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--secondary-light);
+    color: var(--btn-green);
+    font-size: 0.85rem;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.expertise-index-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.expertise-index-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.expertise-index-scope {
+    font-size: 0.82rem;
+    color: var(--dark-gray);
+}
+
+.expertise-index-item:hover,
+.expertise-index-item.active {
+    background-color: var(--secondary-light);
+    transform: translateX(4px);
+}
+
+.expertise-index-item.active .expertise-index-name {
+    color: var(--btn-green);
+}
+
+.expertise-index-item.active .expertise-index-icon {
+    background-color: var(--btn-green);
+    color: var(--white);
+}
+
+.expertise-index-item:focus-visible {
+    outline: 2px solid var(--btn-green-dark);
+    outline-offset: -2px;
+}
+
+@media (max-width: 900px) {
+    .expertise-spotlight {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .expertise-spotlight-main {
+        padding: 32px 28px;
+    }
+
+    .expertise-index {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .expertise-index-item {
+        width: auto;
+        flex: 1 1 auto;
+    }
+
+    .expertise-index-item:hover,
+    .expertise-index-item.active {
+        transform: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .expertise-spotlight-main {
+        padding: 28px 24px;
+    }
+}
+
+/* Page Politique de confidentialité : lecture, pas de vitrine — un article
+   simple, mesure de ligne confortable (720px), hiérarchie de titres classique. */
+.legal-intro {
+    padding: 170px 0 40px;
+    text-align: center;
+}
+
+.legal-intro-content h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--text-color);
+    margin-bottom: 12px;
+}
+
+.legal-updated {
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+}
+
+.legal-section {
+    padding: 20px 0 80px;
+}
+
+.legal-content {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.legal-content h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 40px 0 14px;
+}
+
+.legal-content h2:first-child {
+    margin-top: 0;
+}
+
+.legal-content p {
+    color: var(--dark-gray);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 16px;
+}
+
+.legal-content ul {
+    margin: 0 0 16px 20px;
+    color: var(--dark-gray);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.legal-content li {
+    margin-bottom: 6px;
+}
+
+.legal-content a {
+    color: var(--btn-green);
+    font-weight: 500;
+}
+
+.legal-content strong {
+    color: var(--primary-color);
+}
+
+@media (max-width: 576px) {
+    .legal-intro {
+        padding: 150px 0 30px;
+    }
+
+    .legal-intro-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Section CTA finale */
+.cta-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* La section de conversion finale (#rdv) : seule instance du fond plein Report
+   Green — c'est le moment où on demande l'action, les cercles décoratifs
+   n'ont de sens que sur ce fond (voir Named Rule "Single Accent"). */
+.cta-section#rdv {
+    background-color: var(--btn-green);
+}
+
+.cta-section#rdv .cta-content {
+    color: var(--white);
+}
+
+.cta-section#rdv .cta-content p:first-of-type {
+    margin-bottom: 8px;
+}
+
+.cta-content p.cta-reassurance {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin-bottom: 30px;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.cta-content {
+    text-align: center;
+    color: var(--text-color);
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+/* Footer */
+.footer {
+    background-color:var(--white);
+    color: var(--text-color);
+    padding: 20px 0 20px;
+}
+
+.legal-links:hover {
+    color: var(--dark-gray);
+    transform: translateY(-5px);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.legal-links {
+    display: flex;
+    gap: 30px;
+}
+
+.legal-links a {
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.legal-links a:hover {
+    color: var(--text-color);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.slide-in {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideIn 1s ease forwards;
+    animation-delay: 0.3s;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+.fade-in-up.delay {
+    animation-delay: 0.9s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Parallax effect */
+.parallax-section {
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Ripple effect */
+.ripple-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 10px;
+    height: 10px;
+    background-color: rgba(148, 167, 80, 0.25);
+    border-radius: 50%;
+    opacity: 1;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+@media (max-width: 992px) {
+    .header {
+        left: 12px;
+        right: 12px;
+        top: 12px;
+    }
+
+    .header .container {
+        padding: 0 22px;
+    }
+
+    .header-content {
+        height: 64px;
+    }
+
+    /* Le panneau plein écran du menu mobile démarre sous la capsule
+       flottante (top + hauteur de la capsule), pas sous un bandeau plein
+       largeur — d'où ces valeurs plutôt que 70px en dur. */
+    .main-nav {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: var(--white);
+        transition: var(--transition);
+    }
+
+    .main-nav.active {
+        left: 0;
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+    }
+    
+    .mega-menu {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        width: 100%;
+        padding: 0;
+        margin-top: 15px;
+        display: none;
+    }
+    
+    .dropdown.active .mega-menu {
+        display: block;
+    }
+    
+    .mega-menu::before {
+        display: none;
+    }
+    
+    .mega-menu-content {
+        flex-direction: column;
+    }
+    
+    .mega-menu-column {
+        margin-bottom: 20px;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 70px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+
+
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-dot {
+        left: 20px;
+    }
+    
+    .timeline-content {
+        width: calc(100% - 50px);
+        margin-left: 50px !important;
+    }
+    
+    .form-group {
+        flex-direction: column;
+    }
+    
+    .form-group input,
+    .form-group button {
+        width: 100%;
+        border-radius: 4px;
+    }
+    
+    .form-group button {
+        margin-top: 10px;
+        height: 50px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .legal-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="IT Shore - Expert en développement web, mobile, intégration ERP, IA générative et transformation digitale depuis 2011.">
+    <title>IT Shore - Votre partenaire tech au service de vos métiers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+
+<body>
+    <!-- Header avec menu de navigation -->
+    <div class="header-blur-mask" aria-hidden="true"></div>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="itshore_logo.jpeg" alt="IT Shore Logo">
+                    </a>
+                </div>
+
+                <nav class="main-nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="ia/parlons-ia.html" class="nav-highlight">Parlons IA</a></li>
+                        <li class="dropdown">
+                            <a href="#expertises" class="dropdown-toggle">Expertises <i class="fas fa-chevron-down dropdown-caret" aria-hidden="true"></i></a>
+                            <div class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-code" aria-hidden="true"></i></span>
+                                            <p class="mega-menu-heading">Développement Produit</p>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">Développement Web</span></li>
+                                            <li><span class="mega-menu-item">Développement Mobile</span></li>
+                                            <li><span class="mega-menu-item">Reprise de code</span></li>
+                                            <li><span class="mega-menu-item">Audit d'applications</span></li>
+                                            <li><span class="mega-menu-item">Applications SaaS</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></span>
+                                            <p class="mega-menu-heading">Intégrateur ERP</p>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">Intégrateur Odoo</span></li>
+                                            <li><span class="mega-menu-item">Audit ERP</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-robot" aria-hidden="true"></i></span>
+                                            <p class="mega-menu-heading">Data & AI</p>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">IA Générative</span></li>
+                                            <li><span class="mega-menu-item">Systèmes prédictifs</span></li>
+                                            <li><span class="mega-menu-item">Data Engineering</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <div class="mega-menu-column-head">
+                                            <span class="mega-menu-icon"><i class="fas fa-compass" aria-hidden="true"></i></span>
+                                            <p class="mega-menu-heading">Conseil & Transformation</p>
+                                        </div>
+                                        <ul>
+                                            <li><span class="mega-menu-item">Transformation digitale</span></li>
+                                            <li><span class="mega-menu-item">Conseil IT & Infrastructure</span></li>
+                                            <li><span class="mega-menu-item">Formations</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#methode">Méthode</a></li>
+                        <li><a href="#temoignages">Témoignages</a></li>
+                    </ul>
+                </nav>
+
+                <div class="cta-button">
+                    <a href="#rdv" class="btn-primary smooth-scroll">Démarrer la discussion</a>
+                </div>
+
+                <button type="button" class="mobile-menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mainNav">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section héro avec animation de défilement -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Votre partenaire tech au service de vos métiers</h1>
+                    <p>Depuis 2011, nous concevons et développons des solutions digitales performantes
+                        pour transformer vos défis en opportunités.</p>
+                </div>
+
+                <div class="hero-problems-wrap">
+                    <div class="hero-problems-title">Quelques problèmes qu'on résout</div>
+                    <div class="hero-problems">
+                        <span class="hero-problems-counter"><span class="hero-problems-counter-current">01</span> / 05</span>
+                        <div class="hero-problem-stage">
+                            <p class="hero-problem-line hero-problem-line-problem">
+                                <i class="fas fa-circle-exclamation hero-problem-icon" aria-hidden="true"></i>
+                                <span class="hero-problem-copy"></span>
+                            </p>
+                            <p class="hero-problem-line hero-problem-line-solution">
+                                <i class="fas fa-circle-check hero-problem-icon" aria-hidden="true"></i>
+                                <span class="hero-problem-copy"></span>
+                            </p>
+                        </div>
+                        <div class="hero-problems-progress">
+                            <div class="hero-problems-progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue interactive : comment on s'y prend -->
+            <div class="process-diagram">
+                <div class="diagram-track reveal">
+                    <div class="diagram-rail">
+                        <div class="diagram-rail-fill"></div>
+                    </div>
+                    <div class="diagram-steps">
+                        <button class="diagram-node active" data-step="pre-audit" type="button">
+                            <span class="diagram-node-marker">01</span>
+                            <span class="diagram-node-label">Pré-audit</span>
+                        </button>
+
+                        <button class="diagram-node" data-step="audit" type="button">
+                            <span class="diagram-node-marker">02</span>
+                            <span class="diagram-node-label">Audit</span>
+                        </button>
+
+                        <button class="diagram-node" data-step="identification" type="button">
+                            <span class="diagram-node-marker">03</span>
+                            <span class="diagram-node-label">Identification</span>
+                        </button>
+
+                        <button class="diagram-node" data-step="build" type="button">
+                            <span class="diagram-node-marker">04</span>
+                            <span class="diagram-node-label">Build</span>
+                        </button>
+
+                        <button class="diagram-node" data-step="monitoring" type="button">
+                            <span class="diagram-node-marker">05</span>
+                            <span class="diagram-node-label">Monitoring</span>
+                        </button>
+                    </div>
+                </div>
+
+            <div class="diagram-description reveal" data-delay="150">
+                <span class="diagram-description-text active" data-step="pre-audit">On vérifie ensemble qu'on peut vraiment vous aider.</span>
+                <span class="diagram-description-text" data-step="audit">On audite vos process et votre donnée.</span>
+                <span class="diagram-description-text" data-step="identification">On identifie des cas d'usage concrets.</span>
+                <span class="diagram-description-text" data-step="build">On construit les outils, nous-mêmes.</span>
+                <span class="diagram-description-text" data-step="monitoring">On suit et on fiabilise dans la durée.</span>
+            </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="arrow">
+                <span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section clients -->
+    <section class="clients">
+        <div class="container">
+            <h2 class="section-title reveal">Ils nous ont fait confiance</h2>
+            <div class="clients-slider reveal">
+                <div class="clients-track" aria-hidden="true">
+                    <!-- Les logos clients réels remplaceront ces emplacements. Répétés pour l'effet de défilement infini. -->
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <!-- Répétition pour l'effet de défilement continu -->
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                    <div class="client-logo"><div class="client-logo-placeholder"><i class="fas fa-building"></i></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section expertises : un pôle affiché en détail à la fois (Spotlight),
+         un index compact des 4 pour naviguer — même principe de hiérarchie
+         que les témoignages, plutôt que 4 cases identiques d'un coup. -->
+    <section class="expertise-section" id="expertises">
+        <div class="container">
+            <h2 class="section-title reveal">Nos 4 pôles d'expertise</h2>
+
+            <div class="expertise-spotlight reveal">
+                <div class="expertise-spotlight-main">
+                    <div class="expertise-spotlight-head">
+                        <span class="expertise-spotlight-icon"><i class="fas" aria-hidden="true"></i></span>
+                        <h3 class="expertise-spotlight-title"></h3>
+                    </div>
+                    <p class="expertise-spotlight-desc"></p>
+                    <div class="expertise-spotlight-tags"></div>
+                    <p class="expertise-spotlight-example"></p>
+                </div>
+
+                <div class="expertise-index">
+                    <button class="expertise-index-item active" type="button" data-index="0">
+                        <span class="expertise-index-icon"><i class="fas fa-code" aria-hidden="true"></i></span>
+                        <span class="expertise-index-text">
+                            <span class="expertise-index-name">Développement Produit</span>
+                            <span class="expertise-index-scope">Web, Mobile, SaaS…</span>
+                        </span>
+                    </button>
+                    <button class="expertise-index-item" type="button" data-index="1">
+                        <span class="expertise-index-icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></span>
+                        <span class="expertise-index-text">
+                            <span class="expertise-index-name">Intégrateur ERP</span>
+                            <span class="expertise-index-scope">Odoo, Audit</span>
+                        </span>
+                    </button>
+                    <button class="expertise-index-item" type="button" data-index="2">
+                        <span class="expertise-index-icon"><i class="fas fa-robot" aria-hidden="true"></i></span>
+                        <span class="expertise-index-text">
+                            <span class="expertise-index-name">Data & AI</span>
+                            <span class="expertise-index-scope">IA, Data, Prédictif</span>
+                        </span>
+                    </button>
+                    <button class="expertise-index-item" type="button" data-index="3">
+                        <span class="expertise-index-icon"><i class="fas fa-compass" aria-hidden="true"></i></span>
+                        <span class="expertise-index-text">
+                            <span class="expertise-index-name">Conseil & Transformation</span>
+                            <span class="expertise-index-scope">Stratégie, Formations</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section méthode avec timeline -->
+    <section class="approach" id="methode">
+        <div class="container">
+            <h2 class="section-title reveal">Notre méthode</h2>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Discovery & Cadrage</h3>
+                        <p>Nous prenons le temps de comprendre en profondeur vos enjeux métier, objectifs stratégiques et contraintes techniques.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-delay="200">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Conception & Architecture</h3>
+                        <p>Nous concevons l'architecture technique et l'expérience utilisateur optimales pour votre projet.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-delay="400">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Développement itératif</h3>
+                        <p>Nous développons votre solution par cycles courts (sprints) de 2 à 3 semaines, avec des démonstrations régulières.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-delay="600">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Tests & Assurance Qualité</h3>
+                        <p>La qualité est intégrée tout au long du processus, avec tests automatisés et validation continue.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal" data-delay="800">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Déploiement & Support</h3>
+                        <p>Nous assurons une transition en douceur vers la production, avec formation et support post-lancement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section témoignages -->
+    <section class="testimonials" id="temoignages">
+        <div class="container">
+            <h2 class="section-title reveal">Nos clients témoignent</h2>
+            <div class="testimonial-wall reveal">
+                <div class="testimonial-wall-row" aria-hidden="false">
+                    <div class="testimonial-wall-track">
+                        <!-- Rangée A, dupliquée pour un défilement continu sans coupure -->
+                        <div class="testimonial-wall-card">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"IT Shore a su comprendre nos besoins et proposer une solution parfaitement adaptée. Leur équipe est réactive et compétente."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Marie Durand</span>
+                                <span class="testimonial-wall-company">Directrice Digital, Groupe Nexis</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"Nous avons pu transformer notre processus de production grâce à l'intégration ERP réalisée par IT Shore. Un travail remarquable."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Thomas Laurent</span>
+                                <span class="testimonial-wall-company">Directeur des opérations, ModernTech</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"L'application développée par IT Shore a révolutionné notre relation client. Intuitive et performante, elle nous a permis d'augmenter nos ventes de 30%."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Julie Moreau</span>
+                                <span class="testimonial-wall-company">CEO, EcoStyle</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card" aria-hidden="true">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"IT Shore a su comprendre nos besoins et proposer une solution parfaitement adaptée. Leur équipe est réactive et compétente."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Marie Durand</span>
+                                <span class="testimonial-wall-company">Directrice Digital, Groupe Nexis</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card" aria-hidden="true">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"Nous avons pu transformer notre processus de production grâce à l'intégration ERP réalisée par IT Shore. Un travail remarquable."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Thomas Laurent</span>
+                                <span class="testimonial-wall-company">Directeur des opérations, ModernTech</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card" aria-hidden="true">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"L'application développée par IT Shore a révolutionné notre relation client. Intuitive et performante, elle nous a permis d'augmenter nos ventes de 30%."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Julie Moreau</span>
+                                <span class="testimonial-wall-company">CEO, EcoStyle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-wall-row testimonial-wall-row-b" aria-hidden="false">
+                    <div class="testimonial-wall-track">
+                        <!-- Rangée B, dupliquée aussi, défile en sens inverse -->
+                        <div class="testimonial-wall-card">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"L'équipe d'IT Shore a été d'une aide précieuse dans notre transition numérique. Leur expertise en IA nous a donné un avantage concurrentiel déterminant."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Pierre Dubois</span>
+                                <span class="testimonial-wall-company">CTO, FuturFinance</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"Nous travaillons avec IT Shore depuis 3 ans et sommes pleinement satisfaits de leur professionnalisme et de leur capacité d'innovation."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Sophie Martin</span>
+                                <span class="testimonial-wall-company">Directrice Marketing, BioSolutions</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"Le système prédictif mis en place par IT Shore a considérablement amélioré notre gestion des stocks et réduit nos coûts logistiques."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Jean Leroy</span>
+                                <span class="testimonial-wall-company">Supply Chain Manager, GlobalDistrib</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card" aria-hidden="true">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"L'équipe d'IT Shore a été d'une aide précieuse dans notre transition numérique. Leur expertise en IA nous a donné un avantage concurrentiel déterminant."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Pierre Dubois</span>
+                                <span class="testimonial-wall-company">CTO, FuturFinance</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card" aria-hidden="true">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"Nous travaillons avec IT Shore depuis 3 ans et sommes pleinement satisfaits de leur professionnalisme et de leur capacité d'innovation."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Sophie Martin</span>
+                                <span class="testimonial-wall-company">Directrice Marketing, BioSolutions</span>
+                            </div>
+                        </div>
+                        <div class="testimonial-wall-card" aria-hidden="true">
+                            <i class="fas fa-quote-left testimonial-wall-mark" aria-hidden="true"></i>
+                            <p>"Le système prédictif mis en place par IT Shore a considérablement amélioré notre gestion des stocks et réduit nos coûts logistiques."</p>
+                            <div class="testimonial-wall-author">
+                                <span class="testimonial-wall-name">Jean Leroy</span>
+                                <span class="testimonial-wall-company">Supply Chain Manager, GlobalDistrib</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section projets récents avec filtres -->
+    <section class="recent-projects">
+        <div class="container">
+            <div class="projects-head">
+                <h2 class="section-title reveal">Nos projets récents</h2>
+                <div class="projects-nav">
+                    <button class="projects-nav-btn" type="button" data-dir="-1" aria-label="Projet précédent"><i class="fas fa-arrow-left"></i></button>
+                    <button class="projects-nav-btn" type="button" data-dir="1" aria-label="Projet suivant"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="projects-scroll" id="projectsScroll">
+            <div class="project-card-v2">
+                <div class="project-card-head">
+                    <span class="project-number">Dossier 01</span>
+                    <div class="project-tags">
+                        <span class="tag">Web</span>
+                        <span class="tag">IA</span>
+                        <span class="tag">E-commerce</span>
+                    </div>
+                </div>
+                <div class="project-info-v2">
+                    <span class="project-icon"><i class="fas fa-cart-shopping" aria-hidden="true"></i></span>
+                    <h3>Plateforme e-commerce avec IA</h3>
+                    <p>Recommandations personnalisées pour une boutique de mode en ligne</p>
+                </div>
+                <a href="projet-ecommerce-ia.html" class="project-link">Voir le dossier <i class="fas fa-arrow-up-right-from-square"></i></a>
+            </div>
+
+            <div class="project-card-v2">
+                <div class="project-card-head">
+                    <span class="project-number">Dossier 02</span>
+                    <div class="project-tags">
+                        <span class="tag">Mobile</span>
+                        <span class="tag">Santé</span>
+                        <span class="tag">UX/UI</span>
+                    </div>
+                </div>
+                <div class="project-info-v2">
+                    <span class="project-icon"><i class="fas fa-heart-pulse" aria-hidden="true"></i></span>
+                    <h3>Application mobile de santé</h3>
+                    <p>Suivi personnalisé pour patients et professionnels de santé</p>
+                </div>
+                <a href="projet-sante-mobile.html" class="project-link">Voir le dossier <i class="fas fa-arrow-up-right-from-square"></i></a>
+            </div>
+
+            <div class="project-card-v2">
+                <div class="project-card-head">
+                    <span class="project-number">Dossier 03</span>
+                    <div class="project-tags">
+                        <span class="tag">ERP</span>
+                        <span class="tag">Business Central</span>
+                        <span class="tag">Logistique</span>
+                    </div>
+                </div>
+                <div class="project-info-v2">
+                    <span class="project-icon"><i class="fas fa-truck-fast" aria-hidden="true"></i></span>
+                    <h3>Intégration ERP logistique</h3>
+                    <p>Optimisation de la chaîne d'approvisionnement d'un distributeur national</p>
+                </div>
+                <a href="projet-erp-logistique.html" class="project-link">Voir le dossier <i class="fas fa-arrow-up-right-from-square"></i></a>
+            </div>
+
+            <div class="project-card-v2">
+                <div class="project-card-head">
+                    <span class="project-number">Dossier 04</span>
+                    <div class="project-tags">
+                        <span class="tag">IA</span>
+                        <span class="tag">Web</span>
+                        <span class="tag">Finance</span>
+                    </div>
+                </div>
+                <div class="project-info-v2">
+                    <span class="project-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span>
+                    <h3>Plateforme IA prédictive</h3>
+                    <p>Analyse de données et prévisions pour secteur financier</p>
+                </div>
+                <a href="projet-ia-predictive.html" class="project-link">Voir le dossier <i class="fas fa-arrow-up-right-from-square"></i></a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="projects-progress">
+                <div class="projects-progress-bar" id="projectsProgressBar"></div>
+            </div>
+        </div>
+    </section>
+
+<!-- Section FAQ -->
+<section class="faq">
+    <div class="container">
+        <h2 class="section-title reveal">Questions fréquentes</h2>
+        <p class="section-subtitle reveal">Nous répondons à vos interrogations sur nos services et notre
+            méthodologie</p>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                    <span class="faq-number">Q01</span>
+                    <h3>Quels sont vos délais de réalisation pour un projet web ou mobile ?</h3>
+                    <span class="toggle-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                </button>
+                <div class="faq-answer" id="faq-answer-1">
+                    <p>Les délais varient selon la complexité de votre projet. Une application simple peut prendre 1
+                        à 2 mois, tandis qu'un projet complexe nécessitera 3 à 6 mois. Nous établissons un
+                        calendrier précis dès le début et vous tenons informés de l'avancement à chaque étape.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                    <span class="faq-number">Q02</span>
+                    <h3>Comment assurez-vous la sécurité de nos données ?</h3>
+                    <span class="toggle-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                </button>
+                <div class="faq-answer" id="faq-answer-2">
+                    <p>La sécurité est notre priorité. Nous implémentons les meilleures pratiques comme le
+                        chiffrement des données, l'authentification forte, les tests d'intrusion réguliers et le
+                        respect des normes RGPD. Notre équipe est formée aux dernières techniques de cybersécurité
+                        et applique des protocoles stricts à chaque étape du développement.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                    <span class="faq-number">Q03</span>
+                    <h3>Proposez-vous un service de maintenance après la livraison ?</h3>
+                    <span class="toggle-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                </button>
+                <div class="faq-answer" id="faq-answer-3">
+                    <p>Oui, nous offrons différentes formules de maintenance adaptées à vos besoins : correctif pour
+                        les bugs, évolutif pour les améliorations continues, et préventif pour anticiper les
+                        problèmes. Nos contrats incluent un support technique réactif et des mises à jour régulières
+                        pour garantir la pérennité de votre solution.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                    <span class="faq-number">Q04</span>
+                    <h3>Comment l'IA peut-elle bénéficier à mon entreprise ?</h3>
+                    <span class="toggle-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                </button>
+                <div class="faq-answer" id="faq-answer-4">
+                    <p>L'IA peut transformer votre entreprise de multiples façons : automatisation des tâches
+                        répétitives, analyse prédictive pour anticiper les tendances, personnalisation client,
+                        optimisation des processus, et aide à la décision. Nous évaluons vos besoins spécifiques
+                        pour identifier les applications d'IA les plus pertinentes pour votre secteur et votre
+                        situation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+                    <span class="faq-number">Q05</span>
+                    <h3>Comment évaluez-vous le coût d'un projet de transformation digitale ?</h3>
+                    <span class="toggle-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                </button>
+                <div class="faq-answer" id="faq-answer-5">
+                    <p>Notre tarification est transparente et basée sur plusieurs facteurs : complexité technique,
+                        fonctionnalités requises, intégrations nécessaires, délais souhaités et ressources
+                        mobilisées. Nous proposons une estimation détaillée après l'analyse initiale et travaillons
+                        avec vous pour ajuster le périmètre selon votre budget, en privilégiant la valeur ajoutée.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Section CTA finale avec réservation Calendly intégrée -->
+    <section class="cta-section" id="rdv">
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2>Prêt à transformer votre entreprise ?</h2>
+                <p>Réservez 30 minutes avec notre équipe pour discuter de votre projet.</p>
+                <p class="cta-reassurance">Échange gratuit et sans engagement.</p>
+            </div>
+            <div class="calendly-embed-wrap reveal">
+                <div class="calendly-inline-widget" data-url="https://calendly.com/it-shore/discutons-de-votre-projet-30min?hide_gdpr_banner=1" style="min-width:320px;height:680px;"></div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 IT Shore. Tous droits réservés.</p>
+                </div>
+                <div class="legal-links">
+                    <a href="politique-confidentialite.html">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="animations.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,533 @@
+/* Styles spécifiques pour la page Parlons IA - identité visuelle dédiée.
+   Cette page raconte une histoire au défilement (un process, avant/après
+   l'IA) plutôt que d'empiler des sections vitrine — voir DESIGN.md
+   "Signal Story" pour le principe et les named rules. */
+
+/* Pas de scroll-behavior: smooth ici — voir la note dans le styles.css racine :
+   ça animerait les corrections de scroll involontaires du navigateur au
+   chargement. Les ancres de nav utilisent déjà behavior:'smooth' en JS. */
+
+.ia-page {
+    --ia-bg-deep: #0b0f0d;
+    --ia-panel: rgba(255, 255, 255, 0.04);
+    --ia-panel-border: rgba(255, 255, 255, 0.09);
+    --ia-text: #f3f5f1;
+    --ia-text-dim: #a7b3ac;
+    --ia-accent: #8ee05a;
+    --ia-accent-soft: rgba(142, 224, 90, 0.12);
+    /* JetBrains Mono : uniquement pour les chiffres/repères "console" (stats,
+       compteurs) — Poppins reste la voix du corps de texte et des titres. */
+    --ia-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+    background-color: var(--ia-bg-deep);
+}
+
+/* Scopé à section, pas au header/footer partagés : sinon ça rétrécit aussi
+   le .container du header (identique sur index.html), qui décale le logo
+   par rapport à sa position sur les autres pages. */
+.ia-page section .container {
+    width: 90%;
+}
+
+/* Apparition douce au scroll */
+.ia-page .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.ia-page .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Boutons dédiés à la page IA */
+.btn-ia-primary {
+    display: inline-block;
+    padding: 14px 30px;
+    background-color: var(--btn-green);
+    color: #ffffff;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 2px solid var(--btn-green);
+    transition: var(--transition);
+}
+
+.btn-ia-primary:hover {
+    background-color: var(--btn-green-dark);
+    border-color: var(--btn-green-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(142, 224, 90, 0.25);
+}
+
+/* Hero : une question, adressée directement au visiteur. Pas de grille à
+   deux colonnes ici — l'histoire qui suit est le vrai contenu, le hero
+   n'est que l'ouverture. */
+.ia-hero-v2 {
+    position: relative;
+    overflow: hidden;
+    padding: 170px 0 130px;
+    text-align: center;
+}
+
+.ia-hero-v2 .ai-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.55;
+}
+
+.ia-hero-v2 .network-nodes {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ia-hero-v2 .network-node {
+    position: absolute;
+    background-color: var(--ia-accent);
+    border-radius: 50%;
+    opacity: 0.7;
+    z-index: 2;
+    animation: pulse 3s infinite;
+    box-shadow: 0 0 8px rgba(142, 224, 90, 0.6);
+}
+
+.ia-hero-v2 .network-connection {
+    position: absolute;
+    height: 1px;
+    background-color: var(--ia-accent);
+    opacity: 0.15;
+    transform-origin: left center;
+    z-index: 1;
+    animation: fade 4s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.5); opacity: 0.9; }
+}
+
+@keyframes fade {
+    0%, 100% { opacity: 0.08; }
+    50% { opacity: 0.25; }
+}
+
+.ia-hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.ia-hero-v2 h1 {
+    font-size: 3.1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ia-text);
+    margin-bottom: 20px;
+}
+
+.ia-hero-v2 p {
+    font-size: 1.2rem;
+    color: var(--ia-text-dim);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+}
+
+.ia-hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.ia-hero-v2 .scroll-indicator .mouse {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.ia-hero-v2 .scroll-indicator .arrow span {
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+    border-right-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Section head générique (réutilisé par la galerie d'idées) */
+.ia-section-head {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 50px;
+}
+
+.ia-section-head h2 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--ia-text);
+    margin-bottom: 14px;
+}
+
+.ia-section-head p {
+    color: var(--ia-text-dim);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   L'HISTOIRE — un process, avant / après l'IA, raconté au défilement.
+   La photo reste épinglée (position: sticky) pendant que les "beats" de
+   texte défilent à côté ; chaque beat s'anime à l'entrée dans le viewport.
+   Le duotone de la photo passe de terne (avant) à vif (après) — la
+   transformation se voit, elle n'est pas juste écrite. Voir DESIGN.md
+   "Signal Story".
+   ========================================================================== */
+.ia-story {
+    padding: 110px 0 100px;
+}
+
+.ia-story-head {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px;
+}
+
+.ia-story-head h2 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--ia-text);
+    margin-bottom: 12px;
+}
+
+.ia-story-head p {
+    color: var(--ia-text-dim);
+    font-size: 1.05rem;
+}
+
+.ia-story-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 60px;
+}
+
+.ia-story-sticky-col {
+    position: relative;
+}
+
+.ia-story-sticky {
+    position: sticky;
+    top: 220px;
+    height: 56vh;
+    min-height: 340px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.ia-story-photo-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ia-story-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* "Avant" : noir et blanc pur, aucune teinte de couleur. */
+    filter: grayscale(1) brightness(0.85) contrast(1.05);
+    transition: filter 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* "Avec l'IA" : la photo retrouve sa couleur naturelle — pas un duotone
+   vert, une vraie photo en couleur. Le contraste entre "avant" (gris) et
+   "après" (couleur) porte la transformation, sans passer par le texte. */
+.ia-story-sticky.is-after .ia-story-photo {
+    filter: grayscale(0) brightness(1) contrast(1.02);
+}
+
+.ia-story-phase-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    font-family: var(--ia-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ia-text);
+    background-color: rgba(11, 15, 13, 0.55);
+    border: 1px solid var(--ia-panel-border);
+    padding: 6px 14px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    transition: color 0.4s ease;
+}
+
+.ia-story-sticky.is-after .ia-story-phase-tag {
+    color: var(--ia-accent);
+}
+
+.ia-story-beats-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.ia-story-beat {
+    min-height: 44vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.25;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ia-story-beat.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ia-story-beat p {
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ia-text);
+    max-width: 460px;
+}
+
+.ia-story-tag {
+    display: inline-block;
+    width: fit-content;
+    font-family: var(--ia-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+}
+
+.ia-story-tag-before {
+    color: var(--ia-text-dim);
+    background-color: var(--ia-panel);
+    border: 1px solid var(--ia-panel-border);
+}
+
+.ia-story-tag-after {
+    color: var(--ia-bg-deep);
+    background-color: var(--ia-accent);
+}
+
+.ia-story-beat-final {
+    min-height: auto;
+    padding: 32px 28px;
+    background-color: var(--ia-panel);
+    border: 1px solid var(--ia-panel-border);
+    border-radius: 14px;
+}
+
+.ia-story-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ia-panel-border);
+}
+
+.ia-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ia-stat-value {
+    font-family: var(--ia-mono);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--ia-accent);
+    font-variant-numeric: tabular-nums;
+}
+
+.ia-stat-label {
+    color: var(--ia-text-dim);
+    font-size: 0.85rem;
+    max-width: 160px;
+}
+
+/* ==========================================================================
+   ET DANS VOTRE SECTEUR ? — galerie d'idées concrètes, une par secteur.
+   Même traitement duotone que l'histoire, statique ici (pas de before/after
+   par carte), qui s'avive légèrement au survol.
+   ========================================================================== */
+.ia-ideas {
+    padding: 100px 0;
+}
+
+.ia-ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.ia-idea-card {
+    background-color: var(--ia-panel);
+    border: 1px solid var(--ia-panel-border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ia-idea-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(142, 224, 90, 0.35);
+}
+
+.ia-idea-photo-wrap {
+    position: relative;
+    height: 140px;
+}
+
+.ia-idea-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(0.85);
+    transition: filter 0.4s ease;
+}
+
+.ia-idea-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--ia-bg-deep);
+    mix-blend-mode: color;
+    opacity: 0.85;
+}
+
+.ia-idea-photo-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--ia-accent);
+    mix-blend-mode: color;
+    opacity: 0.25;
+    transition: opacity 0.4s ease;
+}
+
+.ia-idea-card:hover .ia-idea-photo-wrap::after {
+    opacity: 0.5;
+}
+
+.ia-idea-sector {
+    display: block;
+    font-family: var(--ia-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ia-accent);
+    margin: 18px 18px 8px;
+}
+
+.ia-idea-card p {
+    margin: 0 18px 20px;
+    color: var(--ia-text-dim);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* CTA finale */
+.ia-final-cta {
+    padding: 100px 0 120px;
+    text-align: center;
+}
+
+.ia-final-cta-content {
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.ia-final-cta h2 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--ia-text);
+    margin-bottom: 14px;
+}
+
+.ia-final-cta p {
+    color: var(--ia-text-dim);
+    font-size: 1.05rem;
+    margin-bottom: 30px;
+}
+
+/* Footer sombre, cohérent avec la page */
+.ia-page .footer {
+    background-color: var(--ia-bg-deep);
+    color: var(--ia-text-dim);
+    border-top: 1px solid var(--ia-panel-border);
+}
+
+.ia-page .legal-links a {
+    color: var(--ia-text-dim);
+}
+
+.ia-page .legal-links a:hover {
+    color: var(--ia-accent);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .ia-story-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .ia-story-sticky-col {
+        margin-bottom: 30px;
+    }
+
+    .ia-story-sticky {
+        position: static;
+        height: 320px;
+    }
+
+    .ia-story-beat {
+        min-height: 0;
+        opacity: 1;
+        transform: none;
+        padding: 20px 0;
+    }
+
+    .ia-ideas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .ia-hero-v2 h1 {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .ia-hero-v2 {
+        padding: 150px 0 90px;
+    }
+
+    .ia-hero-v2 h1 {
+        font-size: 2rem;
+    }
+
+    .ia-ideas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ia-story-stats {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
