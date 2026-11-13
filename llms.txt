@@ -31,5 +31,5 @@
 - Contact : https://youssef-benmansour.github.io/it-shore-website/contact/contact.html
 
 ## Contact
-- Email : contact@itshore.fr
+- Email : contact@it-shore.com
 - Prise de rendez-vous : appel de 30 minutes, gratuit et sans engagement

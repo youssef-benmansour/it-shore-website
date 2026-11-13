@@ -263,8 +263,6 @@
 
         carousel.querySelector('[data-prev]').addEventListener('click', () => { go(index - 1); restart(); });
         carousel.querySelector('[data-next]').addEventListener('click', () => { go(index + 1); restart(); });
-        carousel.addEventListener('mouseenter', () => clearInterval(timer));
-        carousel.addEventListener('mouseleave', restart);
         carousel.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') { go(index - 1); restart(); }
             if (e.key === 'ArrowRight') { go(index + 1); restart(); }
