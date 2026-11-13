@@ -23,6 +23,7 @@
     --medium-gray: #e0e0e0;
     --dark-gray: #353535;
     --white: #ffffff;
+    --paper: #f9f9f9;
     --shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
@@ -30,7 +31,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
-    background-color: #f9f9f9;
+    background-color: var(--paper);
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -54,6 +55,22 @@ a {
 
 ul {
     list-style: none;
+}
+
+/* Apparition douce au scroll — pilotée par initScrollReveal() dans main.js
+   (IntersectionObserver, ajoute .active). Cette règle de base manquait
+   entièrement ici : seule la variante .ia-page .reveal existait, donc tous
+   les éléments .reveal du Day World (index.html, contact.html, la page
+   légale) s'affichaient en permanence sans jamais réellement apparaître. */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-title {
@@ -239,6 +256,11 @@ section {
     color: var(--btn-green);
 }
 
+.nav-list a:focus-visible {
+    outline: 2px solid var(--btn-green-dark);
+    outline-offset: 2px;
+}
+
 /* "Expertises" est le seul déclencheur cliquable de tout le bloc : même
    langage de survol que les autres liens de nav (soulignement + couleur),
    pas de fond qui apparaît — la puce/chevron suffit à le distinguer comme
@@ -378,11 +400,17 @@ section {
     font-size: 0.9rem;
 }
 
-/* Mobile Menu Toggle */
+/* Mobile Menu Toggle — la zone cliquable fait 44x44px (cible tactile
+   minimale) même si les 3 barres visuelles restent fines et petites ;
+   l'espace autour des barres fait partie du bouton, pas juste du padding
+   décoratif. */
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
-    width: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     background: none;
     border: none;
     padding: 0;
@@ -396,10 +424,14 @@ section {
 
 .mobile-menu-toggle span {
     height: 2px;
-    width: 100%;
+    width: 26px;
     background-color: var(--text-color);
     margin-bottom: 5px;
     transition: var(--transition);
+}
+
+.mobile-menu-toggle span:last-child {
+    margin-bottom: 0;
 }
 
 /* Hero Section */
@@ -486,7 +518,7 @@ section {
     right: 20px;
     font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
     font-variant-numeric: tabular-nums;
     color: var(--dark-gray);
 }
@@ -616,7 +648,7 @@ section {
 
 .hero h1 {
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: 700;
     margin-bottom: 20px;
     color: var(--text-color);
 }
@@ -642,37 +674,6 @@ section {
     flex-direction: column;
     align-items: center;
     z-index: 2;
-}
-
-.mouse {
-    width: 30px;
-    height: 50px;
-    border: 2px solid var(--dark-gray);
-    border-radius: 20px;
-    position: relative;
-}
-
-.wheel {
-    width: 4px;
-    height: 8px;
-    background-color: var(--primary-color);
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    animation: scroll-wheel 1.5s infinite;
-}
-
-@keyframes scroll-wheel {
-    0% {
-        opacity: 1;
-        top: 10px;
-    }
-    100% {
-        opacity: 0;
-        top: 30px;
-    }
 }
 
 .arrow {
@@ -890,6 +891,26 @@ section {
     z-index: 2;
 }
 
+/* Solution de repli si le widget ne charge pas (bloqueur de pub, script
+   lent) : toujours visible, pas conditionnée à un état d'erreur détecté en
+   JS. Porte aussi la mention de confidentialité que le paramètre
+   hide_gdpr_banner masquait côté Calendly sans rien mettre à la place. */
+.calendly-fallback {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--white);
+    line-height: 1.6;
+}
+
+.calendly-fallback a {
+    color: var(--white);
+    text-decoration: underline;
+}
+
 /* Approche / Timeline Section */
 
 .timeline {
@@ -1073,7 +1094,7 @@ section {
 .project-number {
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--btn-green);
     background-color: var(--white);
@@ -1133,6 +1154,11 @@ section {
     color: var(--btn-green);
     font-weight: 600;
     font-size: 0.88rem;
+}
+
+.project-link:focus-visible {
+    outline: 2px solid var(--btn-green-dark);
+    outline-offset: 2px;
 }
 
 .project-link i {
@@ -1316,9 +1342,20 @@ section {
     color: var(--dark-gray);
 }
 
+/* Couvre tout ce qui tourne en boucle infinie sur le Day World, pas
+   seulement le mur de témoignages : le carrousel de logos clients et les
+   deux animations du scroll-indicator (point + chevrons) n'avaient aucune
+   alternative pour un visiteur sensible au mouvement. */
 @media (prefers-reduced-motion: reduce) {
-    .testimonial-wall-track {
+    .testimonial-wall-track,
+    .clients-track,
+    .arrow span {
         animation: none;
+    }
+
+    .reveal {
+        transition: opacity 0.3s ease;
+        transform: none;
     }
 }
 
@@ -1428,7 +1465,7 @@ section {
     flex-shrink: 0;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
     color: var(--btn-green);
     background-color: var(--secondary-light);
     padding: 4px 11px;
@@ -1538,202 +1575,148 @@ section {
     }
 }
 
-/* Section expertises (homepage #expertises) : "Spotlight + Index" — un pôle
-   affiché en détail à la fois (grand, avec tags et exemple concret) et un
-   index compact des 4 autres pour naviguer, plutôt que 4 cases identiques
-   d'un coup — le même principe de hiérarchie que les témoignages. */
+/* Section expertises (homepage #expertises) : "Le Registre" — un seul bloc
+   relié en 4 colonnes, comme une fiche de synthèse dans un rapport, plutôt
+   que 4 cartes identiques séparées (ou un panneau + index qui cache 3 pôles
+   sur 4 en permanence). Tout le contenu des 4 pôles reste visible en même
+   temps ; seul le survol d'une colonne réagit (fond Field Sage Wash, icône
+   qui s'inverse), à la manière d'une ligne de tableau qu'on suit du doigt. */
 .expertise-section {
     padding: 30px 0 70px;
 }
 
-.expertise-spotlight {
+.expertise-ledger {
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: 50px;
-    align-items: center;
-    max-width: 1000px;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1140px;
     margin: 0 auto;
-}
-
-.expertise-spotlight-main {
-    position: relative;
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: var(--shadow);
-    padding: 44px 40px;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
-.expertise-spotlight-main.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.expertise-spotlight:hover .expertise-spotlight-main {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-}
-
-.expertise-spotlight-head {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.expertise-spotlight-icon {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: var(--secondary-light);
-    color: var(--btn-green);
-    font-size: 1.1rem;
-}
-
-.expertise-spotlight-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.expertise-spotlight-desc {
-    font-size: 1rem;
-    line-height: 1.65;
-    color: var(--dark-gray);
-    margin-bottom: 24px;
-}
-
-.expertise-spotlight-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 24px;
-}
-
-.expertise-spotlight-example {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--dark-gray);
-    padding-top: 20px;
-    border-top: 1px solid var(--medium-gray);
-}
-
-.expertise-spotlight-example strong {
-    color: var(--primary-color);
-}
-
-.expertise-spotlight-example a {
-    color: var(--btn-green);
-    font-weight: 600;
-}
-
-.expertise-index {
+.expertise-ledger-col {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    padding: 40px 26px;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.expertise-index-item {
+.expertise-ledger-col + .expertise-ledger-col {
+    border-left: 1px solid var(--medium-gray);
+}
+
+.expertise-ledger-col:hover {
+    background-color: var(--secondary-light);
+}
+
+.expertise-ledger-head {
     display: flex;
     align-items: center;
-    gap: 12px;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 16px;
-    cursor: pointer;
-    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    gap: 14px;
+    margin-bottom: 18px;
 }
 
-.expertise-index-icon {
+.expertise-ledger-icon {
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: var(--secondary-light);
     color: var(--btn-green);
-    font-size: 0.85rem;
+    font-size: 1rem;
     transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.expertise-index-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.expertise-index-name {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--text-color);
-    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.expertise-index-scope {
-    font-size: 0.82rem;
-    color: var(--dark-gray);
-}
-
-.expertise-index-item:hover,
-.expertise-index-item.active {
-    background-color: var(--secondary-light);
-    transform: translateX(4px);
-}
-
-.expertise-index-item.active .expertise-index-name {
-    color: var(--btn-green);
-}
-
-.expertise-index-item.active .expertise-index-icon {
+.expertise-ledger-col:hover .expertise-ledger-icon {
     background-color: var(--btn-green);
     color: var(--white);
 }
 
-.expertise-index-item:focus-visible {
-    outline: 2px solid var(--btn-green-dark);
-    outline-offset: -2px;
+.expertise-ledger-head h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.expertise-ledger-col > p {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.expertise-ledger-list {
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.expertise-ledger-list li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+    line-height: 1.8;
+}
+
+.expertise-ledger-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+}
+
+.expertise-ledger-example {
+    font-size: 0.82rem;
+    color: var(--dark-gray);
+    line-height: 1.5;
+    padding-top: 14px;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.expertise-ledger-example strong {
+    color: var(--primary-color);
+}
+
+.expertise-ledger-example a {
+    color: var(--btn-green);
+    font-weight: 600;
 }
 
 @media (max-width: 900px) {
-    .expertise-spotlight {
-        grid-template-columns: 1fr;
-        gap: 24px;
+    .expertise-ledger {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .expertise-spotlight-main {
-        padding: 32px 28px;
+    .expertise-ledger-col:nth-child(even) {
+        border-left: none;
     }
 
-    .expertise-index {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .expertise-index-item {
-        width: auto;
-        flex: 1 1 auto;
-    }
-
-    .expertise-index-item:hover,
-    .expertise-index-item.active {
-        transform: none;
+    .expertise-ledger-col:nth-child(n+3) {
+        border-top: 1px solid var(--medium-gray);
     }
 }
 
 @media (max-width: 576px) {
-    .expertise-spotlight-main {
-        padding: 28px 24px;
+    .expertise-ledger {
+        grid-template-columns: 1fr;
+    }
+
+    .expertise-ledger-col {
+        padding: 32px 24px;
+        border-left: none !important;
+    }
+
+    .expertise-ledger-col + .expertise-ledger-col {
+        border-top: 1px solid var(--medium-gray);
     }
 }
 
@@ -1746,7 +1729,7 @@ section {
 
 .legal-intro-content h1 {
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: 700;
     color: var(--text-color);
     margin-bottom: 12px;
 }
@@ -1834,9 +1817,11 @@ section {
     margin-bottom: 8px;
 }
 
+/* Pas d'opacité réduite ici : à 85%, le blanc sur Report Green tombait sous
+   4.5:1 (contraste mesuré ~3.93:1, en dessous du seuil AA). Le retrait
+   visuel vient de la taille de police, pas d'un texte qui se lit mal. */
 .cta-content p.cta-reassurance {
     font-size: 0.95rem;
-    opacity: 0.85;
     margin-bottom: 30px;
 }
 

@@ -40,8 +40,10 @@ Applied AI expertise layered onto classic dev/ERP delivery — few competitors c
 
 ## Evidence on Hand
 
-- Homepage testimonials (Marie Durand, Thomas Laurent, Julie Moreau, Pierre Dubois, Sophie Martin, Jean Leroy) and client logos (`images/clients/client-1.png` … `client-8.png`) are confirmed **placeholders**, not real customers or quotes (also visibly duplicated/lorem-like in the current markup). Future work must not treat these as real proof and must not fabricate new fake testimonials, client names, or logos — replace with real evidence when the user supplies it, or use honest placeholder treatment until then.
-- Project case cards (e-commerce IA, santé mobile, ERP logistique, IA prédictive) are similarly unconfirmed as real case studies — treat as illustrative until confirmed.
+- **Client logos** (`images/clients/*.webp`) and **homepage testimonials** now come from signed reference attestations ("attestations de référence") supplied by IT Shore: Groupe Alliances, Ordre National des Notaires du Maroc, Vivo Energy Maroc (Shell), Compagnie Générale Immobilière (Groupe CDG), Auto Hall, ONEE, SOFAC, Les Eaux Minérales d'Oulmès, Ocean Akad International (Dubaï), Aryan's, La Voie Express. Logos were cropped from the letterheads (replace with official files when available, same file names).
+- Testimonials are **faithful excerpts** of those letters, attributed to company + role (no personal names published). Do not paraphrase them into stronger claims or add metrics the letters don't contain.
+- "Nos projets récents" lists projects described in those attestations (no contract amounts published).
+- The `/ia` page's examples remain illustrative.
 
 ## Product Principles
 

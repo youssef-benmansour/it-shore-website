@@ -5,3 +5,6 @@
 # pas du contenu du site
 .claude/
 .impeccable/
+
+# Fichiers intermédiaires de la vidéo
+brag-output/

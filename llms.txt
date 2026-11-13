@@ -1,0 +1,35 @@
+# IT Shore
+
+> IT Shore est une société de services numériques fondée en 2011 qui conçoit, développe et fait évoluer des logiciels métier sur mesure pour les entreprises : applications web et mobiles, intégration d'ERP (Odoo), data et intelligence artificielle, conseil en transformation digitale. Une seule équipe interne mène chaque projet de l'audit à la maintenance. IT Shore a notamment créé AviLaw, Mazid, PMTDR, Tasdiq, Contencia-Soft, Contrat-Soft et TaskPoint.
+
+## Ce que fait IT Shore
+- Développement produit : applications web et mobiles, reprise de code, audit d'applications, applications SaaS
+- Intégration ERP : intégrateur Odoo, audit ERP
+- Data et IA : IA générative, agents IA, systèmes prédictifs, data engineering, automatisation de workflows
+- Conseil et transformation : transformation digitale, conseil IT et infrastructure, formations
+
+## Comment IT Shore travaille
+1. Écouter les équipes et analyser les besoins
+2. Repenser le processus avant de coder
+3. Construire par livraisons courtes, validées avec le client
+4. Former, déployer et assurer le support dans la durée
+
+## Logiciels développés
+- **AviLaw** : Gestion des consultations juridiques pour les directions juridiques : demandes centralisées, délais, coûts, indicateurs. (https://avilaw.it-shore.com/)
+- **Mazid** : Plateforme web et mobile qui verse une commission aux vendeurs en pharmacie lorsqu'ils recommandent un produit partenaire (QR code). (https://mazid.ma)
+- **PMTDR** : Approvisionnement des stations-service : commandes de matériel sous budget, suivi des stocks de carburant, back-office.
+- **Fuel Delivery System** : Outil de continuité d'activité : saisie des livraisons de carburant quand l'ERP est indisponible, puis synchronisation automatique.
+- **Tasdiq** : Vérification de documents : lecture, contrôles croisés, score explicable et intégration à l'ERP (prototype).
+- **GED réglementaire** : Gestion électronique des documents réglementaires du transport de carburant, validation en deux étapes et alertes d'expiration.
+- **Contencia-Soft** : Logiciel de gestion du contentieux : dossiers, audiences, échéances, coûts et honoraires, tableau de bord des risques.
+- **Contrat-Soft** : Logiciel de gestion des contrats : centralisation, alertes sur les échéances et les renouvellements tacites.
+- **TaskPoint** : Logiciel de suivi de l'exécution des projets, pour en améliorer la rentabilité et la performance.
+
+## Pages
+- Accueil : https://youssef-benmansour.github.io/it-shore-website/
+- Parlons IA (services IA, exemples de cas d'usage, FAQ) : https://youssef-benmansour.github.io/it-shore-website/ia/parlons-ia.html
+- Contact : https://youssef-benmansour.github.io/it-shore-website/contact/contact.html
+
+## Contact
+- Email : contact@itshore.fr
+- Prise de rendez-vous : appel de 30 minutes, gratuit et sans engagement

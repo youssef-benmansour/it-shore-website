@@ -28,6 +28,19 @@
     width: 90%;
 }
 
+/* ==========================================================================
+   HEADER — reste clair sur les deux pages (comme le Day World) : le header
+   et le mega-menu de "Expertises" gardent la capsule translucide blanche et
+   le panneau blanc habituels, sans skin sombre. Seule la LARGEUR du
+   mega-menu change ici (2 colonnes au lieu de 4) ; les couleurs, elles,
+   restent identiques d'une page à l'autre — c'est le contenu du menu
+   (Construire / Automatiser plutôt que les 4 pôles) qui distingue les pages,
+   pas une palette différente.
+   ========================================================================== */
+.ia-page .mega-menu {
+    width: 480px;
+}
+
 /* Apparition douce au scroll */
 .ia-page .reveal {
     opacity: 0;
@@ -145,10 +158,6 @@
     flex-wrap: wrap;
 }
 
-.ia-hero-v2 .scroll-indicator .mouse {
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
 .ia-hero-v2 .scroll-indicator .arrow span {
     border-bottom-color: rgba(255, 255, 255, 0.3);
     border-right-color: rgba(255, 255, 255, 0.3);
@@ -175,6 +184,185 @@
 }
 
 /* ==========================================================================
+   CE QU'ON FAIT — grille 3x2 de cartes, tout le contenu visible sans clic.
+   Chaque carte porte une image (photo à venir : voir le placeholder
+   honnête ci-dessous, même principe que le Client Logo Marquee) plutôt
+   qu'un simple icône+titre+texte — la photo est l'ancrage visuel de la
+   carte, pas une décoration ajoutée après coup.
+   ========================================================================== */
+.ia-services {
+    padding: 100px 0 90px;
+}
+
+.ia-services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.ia-service-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--ia-panel);
+    border: 1px solid var(--ia-panel-border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ia-service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(142, 224, 90, 0.3);
+}
+
+.ia-service-card-media {
+    position: relative;
+    height: 160px;
+}
+
+.ia-service-card-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Placeholder honnête tant qu'aucune vraie photo n'est fournie pour ce
+   service — pas un faux gradient qui prétend être une image, un vrai
+   signal "photo à venir" (même principe que le Client Logo Marquee).
+   À remplacer par <img class="ia-service-card-img"> dès qu'une photo existe. */
+.ia-service-card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px dashed var(--ia-panel-border);
+    background-color: rgba(255, 255, 255, 0.02);
+    color: var(--ia-text-dim);
+    font-size: 1.8rem;
+}
+
+.ia-service-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 22px 22px 24px;
+}
+
+.ia-service-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.ia-service-number {
+    flex-shrink: 0;
+    font-family: var(--ia-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ia-accent);
+    background-color: var(--ia-accent-soft);
+    padding: 4px 11px;
+    border-radius: 999px;
+}
+
+.ia-service-duration {
+    flex-shrink: 0;
+    font-family: var(--ia-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ia-text-dim);
+    white-space: nowrap;
+}
+
+.ia-service-card-body h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ia-text);
+    margin-bottom: 10px;
+}
+
+.ia-service-card-body p {
+    color: var(--ia-text-dim);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.ia-service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.ia-service-tag {
+    font-size: 0.78rem;
+    color: var(--ia-text-dim);
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ia-panel-border);
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+/* ==========================================================================
+   NOTRE MÉTHODE — même timeline verticale que le Day World (`.timeline`,
+   `initTimelineProgress()` dans animations.js, déjà générique), recolorée
+   pour le Night World plutôt que reconstruite : la barre qui se remplit au
+   scroll et les points qui passent au vert restent le même mécanisme.
+   ========================================================================== */
+.ia-method {
+    padding: 100px 0;
+}
+
+.ia-page .timeline::before {
+    background-color: var(--ia-panel-border);
+}
+
+.ia-page .timeline::after {
+    background-color: var(--ia-accent);
+}
+
+.ia-page .timeline-dot {
+    background-color: var(--ia-bg-deep);
+    border-color: var(--ia-panel-border);
+}
+
+.ia-page .timeline-dot.reached {
+    background-color: var(--ia-accent);
+    border-color: var(--ia-accent);
+}
+
+.ia-page .timeline-item:hover .timeline-dot {
+    box-shadow: 0 4px 12px rgba(142, 224, 90, 0.4);
+}
+
+.ia-page .timeline-content {
+    background-color: var(--ia-panel);
+    border: 1px solid var(--ia-panel-border);
+    box-shadow: none;
+}
+
+.ia-page .timeline-item:hover .timeline-content {
+    box-shadow: none;
+    border-color: rgba(142, 224, 90, 0.3);
+}
+
+.ia-page .timeline-content h3 {
+    color: var(--ia-accent);
+}
+
+.ia-page .timeline-content p {
+    color: var(--ia-text-dim);
+}
+
+/* ==========================================================================
    L'HISTOIRE — un process, avant / après l'IA, raconté au défilement.
    La photo reste épinglée (position: sticky) pendant que les "beats" de
    texte défilent à côté ; chaque beat s'anime à l'entrée dans le viewport.
@@ -182,8 +370,26 @@
    transformation se voit, elle n'est pas juste écrite. Voir DESIGN.md
    "Signal Story".
    ========================================================================== */
+/* Chaque cas d'usage colore légèrement l'arrière-plan de la section avec une
+   lueur d'ambiance (pas un aplat), teintée via --story-glow (RGB défini en
+   JS par cas). Volontairement à faible opacité et dégradée vers le fond
+   Signal Void habituel : la couleur reste une atmosphère par histoire, pas
+   un deuxième accent — le vert Signal Lime des chips/boutons ne change
+   jamais, seule cette lueur de fond varie. Le dégradé se fond dans le
+   Signal Void de part et d'autre, donc pas de démarcation dure créée avec
+   les sections voisines. */
 .ia-story {
+    position: relative;
     padding: 110px 0 100px;
+    --story-glow: 142, 224, 90;
+    background:
+        radial-gradient(900px 560px at 22% 10%, rgba(var(--story-glow), 0.16), transparent 70%),
+        var(--ia-bg-deep);
+}
+
+.ia-story > .container {
+    position: relative;
+    z-index: 1;
 }
 
 .ia-story-head {
@@ -202,6 +408,64 @@
 .ia-story-head p {
     color: var(--ia-text-dim);
     font-size: 1.05rem;
+}
+
+/* Sélecteur de cas d'usage : centré et compact quand il tient dans la
+   largeur, défilable (glisser-déposer + scroll tactile) sinon — jamais de
+   flèches, le glissement fait office de "manuel" demandé. */
+.ia-case-switcher {
+    display: flex;
+    gap: 10px;
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto 50px;
+    padding: 4px 4px 8px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    cursor: grab;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+}
+
+.ia-case-switcher::-webkit-scrollbar {
+    display: none;
+}
+
+.ia-case-switcher.dragging {
+    cursor: grabbing;
+}
+
+.ia-case-chip {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ia-text-dim);
+    background-color: var(--ia-panel);
+    border: 1px solid var(--ia-panel-border);
+    border-radius: 999px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ia-case-chip:hover {
+    border-color: rgba(142, 224, 90, 0.4);
+    color: var(--ia-text);
+}
+
+.ia-case-chip.active {
+    background-color: var(--ia-accent);
+    border-color: var(--ia-accent);
+    color: var(--ia-bg-deep);
+    font-weight: 600;
+}
+
+.ia-case-chip:focus-visible {
+    outline: 2px solid var(--ia-accent);
+    outline-offset: 2px;
 }
 
 .ia-story-layout {
@@ -254,7 +518,7 @@
     font-family: var(--ia-mono);
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ia-text);
     background-color: rgba(11, 15, 13, 0.55);
@@ -274,27 +538,79 @@
     flex-direction: column;
 }
 
-.ia-story-beat {
-    min-height: 44vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0.25;
-    transform: translateY(16px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+/* Le "stage" est un repère de scroll pur (pas de mise en forme visible) :
+   sa hauteur donne au visiteur assez de distance pour lire chaque groupe
+   avant la bascule suivante — trois phases, trois tiers de cette hauteur.
+   Le contenu réel vit dans `.ia-story-slot`, épinglé par-dessus lui. */
+.ia-story-stage {
+    position: relative;
+    /* ~70vh par phase (Avant / Avec l'IA / Résultat) : assez pour lire 3
+       points courts avant que la bascule suivante n'arrive. Une valeur plus
+       courte a fait apparaître "Avec l'IA" avant que "Avant" soit lu. */
+    min-height: 210vh;
 }
 
-.ia-story-beat.is-visible {
+/* Épinglée exactement comme la photo (même `top`/`height`/`min-height`) pour
+   que les deux restent alignées et centrées l'une par rapport à l'autre tout
+   le temps où le stage défile derrière elles. */
+.ia-story-slot {
+    position: sticky;
+    top: 220px;
+    height: 56vh;
+    min-height: 340px;
+    display: grid;
+    align-content: center;
+}
+
+/* Empilement en une seule case de grille : les trois beats ("avant", "avec
+   l'IA", "résultat") occupent exactement le même emplacement, centré sur la
+   photo. Le scroll fait disparaître l'un pour révéler le suivant à sa place
+   — jamais un défilement de blocs séparés — pendant que la photo reste fixe. */
+.ia-story-point-group,
+.ia-story-result {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.ia-story-stage[data-phase="0"] .ia-story-point-group-before,
+.ia-story-stage[data-phase="1"] .ia-story-point-group-after,
+.ia-story-stage[data-phase="2"] .ia-story-result {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;
 }
 
-.ia-story-beat p {
-    font-size: 1.35rem;
+.ia-story-points {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ia-story-points li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 1.15rem;
     font-weight: 500;
     line-height: 1.5;
     color: var(--ia-text);
     max-width: 460px;
+}
+
+.ia-story-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 10px;
+    height: 2px;
+    background-color: var(--ia-text-dim);
+}
+
+.ia-story-point-group-after .ia-story-points li::before {
+    background-color: var(--ia-accent);
 }
 
 .ia-story-tag {
@@ -303,7 +619,7 @@
     font-family: var(--ia-mono);
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 4px 12px;
     border-radius: 999px;
@@ -321,12 +637,23 @@
     background-color: var(--ia-accent);
 }
 
-.ia-story-beat-final {
-    min-height: auto;
+/* Le résultat forme son propre "beat", troisième et dernière phase de la
+   même bascule (voir `.ia-story-point-group` ci-dessus) : sa visibilité et
+   son opacité/transform de base viennent de cette règle partagée, pas d'ici —
+   ce bloc ne pose que l'habillage visuel (carte, fond, bordure). */
+.ia-story-result {
     padding: 32px 28px;
     background-color: var(--ia-panel);
     border: 1px solid var(--ia-panel-border);
     border-radius: 14px;
+}
+
+.ia-story-result p {
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ia-text);
+    max-width: 460px;
 }
 
 .ia-story-stats {
@@ -356,6 +683,13 @@
     color: var(--ia-text-dim);
     font-size: 0.85rem;
     max-width: 160px;
+}
+
+.ia-story-stats-note {
+    margin-top: 14px;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ia-text-dim);
 }
 
 /* ==========================================================================
@@ -428,7 +762,7 @@
     font-family: var(--ia-mono);
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ia-accent);
     margin: 18px 18px 8px;
@@ -465,6 +799,22 @@
     margin-bottom: 30px;
 }
 
+/* Solution de repli si le widget Calendly ne charge pas (bloqueur de pub,
+   script lent) : toujours visible. Porte aussi la mention de
+   confidentialité que hide_gdpr_banner masquait sans rien mettre à la place. */
+.ia-calendly-fallback {
+    max-width: 480px;
+    margin: 16px auto 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--ia-text-dim);
+    line-height: 1.6;
+}
+
+.ia-calendly-fallback a {
+    color: var(--ia-accent);
+}
+
 /* Footer sombre, cohérent avec la page */
 .ia-page .footer {
     background-color: var(--ia-bg-deep);
@@ -495,14 +845,47 @@
         height: 320px;
     }
 
-    .ia-story-beat {
+    /* Pas de bascule au scroll sur mobile : les trois beats s'affichent l'un
+       après l'autre, toujours visibles, comme le reste du site en dessous de
+       ce point d'arrêt (une bascule pilotée par le scroll n'y est pas lisible). */
+    .ia-story-stage {
         min-height: 0;
+    }
+
+    .ia-story-slot {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        height: auto;
+        min-height: 0;
+    }
+
+    .ia-story-point-group,
+    .ia-story-result {
+        position: static;
+        pointer-events: auto;
+        transition: none;
+    }
+
+    /* Répète les mêmes sélecteurs que la bascule desktop (`[data-phase="N"]
+       ...`) à spécificité égale pour les emporter par l'ordre des règles :
+       sans ça, un stage resté sur une phase antérieure d'un scroll précédent
+       laisserait les deux autres beats masqués en opacity:0 sur mobile. */
+    .ia-story-point-group,
+    .ia-story-result,
+    .ia-story-stage[data-phase="0"] .ia-story-point-group-before,
+    .ia-story-stage[data-phase="1"] .ia-story-point-group-after,
+    .ia-story-stage[data-phase="2"] .ia-story-result {
         opacity: 1;
         transform: none;
-        padding: 20px 0;
     }
 
     .ia-ideas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ia-services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -526,8 +909,37 @@
         grid-template-columns: 1fr;
     }
 
+    .ia-services-grid {
+        grid-template-columns: 1fr;
+    }
+
     .ia-story-stats {
         flex-direction: column;
         gap: 16px;
+    }
+}
+
+/* Cette page est la plus animée du site (particules du hero, transition
+   niveaux de gris -> couleur, lueur par cas, reveal au scroll) et n'avait
+   jusqu'ici aucune alternative pour un visiteur sensible au mouvement. */
+@media (prefers-reduced-motion: reduce) {
+    .ia-hero-v2 .network-node,
+    .ia-hero-v2 .network-connection {
+        animation: none;
+    }
+
+    .ia-story-photo {
+        transition: none;
+    }
+
+    .ia-story-point-group,
+    .ia-story-result {
+        transition: opacity 0.3s ease;
+        transform: none;
+    }
+
+    .ia-page .reveal {
+        transition: opacity 0.3s ease;
+        transform: none;
     }
 }

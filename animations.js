@@ -10,9 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Galerie de projets défilable
     initProjectsShowcase();
 
-    // Pôle d'expertise en vedette + index cliquable
-    initExpertiseSpotlight();
-
     // Barre de la timeline "Notre méthode" qui se dessine au scroll
     initTimelineProgress();
 
@@ -244,6 +241,11 @@ function initParticlesEffect() {
     const host = document.querySelector('.hero-problems-wrap');
     if (!host) return;
 
+    // Animation purement décorative et continue : un média CSS ne peut pas
+    // l'arrêter puisqu'elle est pilotée en JS (canvas), donc on vérifie la
+    // préférence explicitement plutôt que de l'ignorer.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     // Canvas fixé au viewport : un fond très discret sur toute la page,
     // pas juste le hero, et toujours derrière le contenu (z-index négatif).
     const canvas = document.createElement('canvas');
@@ -455,85 +457,4 @@ function initProjectsShowcase() {
         e.preventDefault();
         scrollEl.scrollLeft = startScroll - (e.pageX - startX);
     });
-}
-
-// Un pôle mis en avant à la fois (description, tags, exemple concret) + un
-// index cliquable pour les 4 autres, sans autoplay : contrairement à une
-// citation courte, il y a ici assez à lire pour que le visiteur ait besoin
-// de choisir son rythme plutôt que de le voir défiler tout seul.
-function initExpertiseSpotlight() {
-    const root = document.querySelector('.expertise-spotlight');
-    if (!root) return;
-
-    const main = root.querySelector('.expertise-spotlight-main');
-    const iconEl = main.querySelector('.expertise-spotlight-icon i');
-    const titleEl = main.querySelector('.expertise-spotlight-title');
-    const descEl = main.querySelector('.expertise-spotlight-desc');
-    const tagsEl = main.querySelector('.expertise-spotlight-tags');
-    const exampleEl = main.querySelector('.expertise-spotlight-example');
-    const items = root.querySelectorAll('.expertise-index-item');
-
-    const poles = [
-        {
-            icon: 'fa-code',
-            title: 'Développement Produit',
-            desc: "De l'application web à l'app mobile, en passant par la reprise d'un code existant : on conçoit et on maintient vos produits digitaux, du premier commit à la mise en production.",
-            tags: ['Développement Web', 'Développement Mobile', 'Reprise de code', "Audit d'applications", 'Applications SaaS'],
-            example: "reprise d'une application vieillissante pour un client retail, refonte progressive sans interruption de service."
-        },
-        {
-            icon: 'fa-diagram-project',
-            title: 'Intégrateur ERP',
-            desc: 'On déploie et on audite les ERP qui font tourner votre back-office — en priorité Odoo — pour que vos équipes travaillent enfin dans un seul outil, pas dix.',
-            tags: ['Intégrateur Odoo', 'Audit ERP'],
-            example: "migration d'une PME industrielle de tableurs Excel dispersés vers un Odoo unifié (stock, facturation, CRM)."
-        },
-        {
-            icon: 'fa-robot',
-            title: 'Data & AI',
-            desc: 'De la donnée brute au modèle qui décide : pipelines de données, systèmes prédictifs et IA générative appliquée à vos process métier.',
-            tags: ['IA Générative', 'Systèmes prédictifs', 'Data Engineering'],
-            example: 'un agent qui lit les demandes clients entrantes et les route automatiquement vers le bon service.',
-            link: { href: 'ia/parlons-ia.html', label: 'Voir Parlons IA →' }
-        },
-        {
-            icon: 'fa-compass',
-            title: 'Conseil & Transformation',
-            desc: 'Avant de coder, on prend du recul : diagnostic de votre existant, stratégie de transformation, montée en compétence de vos équipes.',
-            tags: ['Transformation digitale', 'Conseil IT & Infrastructure', 'Formations'],
-            example: "audit d'infrastructure pour une scale-up avant une levée de fonds, feuille de route sur 12 mois."
-        }
-    ];
-
-    const CROSSFADE_OUT = 220;
-    let current = 0;
-
-    function setContent(i) {
-        const pole = poles[i];
-        iconEl.className = `fas ${pole.icon}`;
-        titleEl.textContent = pole.title;
-        descEl.textContent = pole.desc;
-        tagsEl.innerHTML = pole.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-        exampleEl.innerHTML = `<strong>Concrètement&nbsp;:</strong> ${pole.example}`
-            + (pole.link ? ` <a href="${pole.link.href}">${pole.link.label}</a>` : '');
-        items.forEach((item, idx) => item.classList.toggle('active', idx === i));
-    }
-
-    function goTo(i) {
-        if (i === current) return;
-        current = i;
-        main.classList.remove('is-visible');
-        setTimeout(() => {
-            setContent(i);
-            main.classList.add('is-visible');
-        }, CROSSFADE_OUT);
-    }
-
-    items.forEach((item, i) => {
-        item.addEventListener('click', () => goTo(i));
-    });
-
-    // Premier rendu immédiat, sans le fondu de sortie (rien à faire disparaître).
-    setContent(0);
-    main.classList.add('is-visible');
 }
