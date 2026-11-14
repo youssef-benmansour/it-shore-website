@@ -15,7 +15,7 @@ Options -Indexes
     # Anciennes pages WordPress / pages de spam : renvoyer « disparu » (410)
     RewriteCond %{QUERY_STRING} (^|&)(sitemap[0-9a-z]*\.xml|p=|page_id=) [NC]
     RewriteRule ^ - [G,L]
-    RewriteRule ^(wp-admin|wp-content|wp-includes|4c68c)(/|$) - [G,L]
+    RewriteRule ^(wp-admin|wp-content|wp-includes|4c68c|contact)(/|$) - [G,L]
 </IfModule>
 
 <IfModule mod_headers.c>

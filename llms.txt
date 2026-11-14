@@ -28,7 +28,6 @@
 ## Pages
 - Accueil : https://it-shore.com/
 - Parlons IA (services IA, exemples de cas d'usage, FAQ) : https://it-shore.com/ia/parlons-ia.html
-- Contact : https://it-shore.com/contact/contact.html
 
 ## Contact
 - Email : contact@it-shore.com
