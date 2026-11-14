@@ -26,9 +26,9 @@
 - **TaskPoint** : Logiciel de suivi de l'exécution des projets, pour en améliorer la rentabilité et la performance.
 
 ## Pages
-- Accueil : https://youssef-benmansour.github.io/it-shore-website/
-- Parlons IA (services IA, exemples de cas d'usage, FAQ) : https://youssef-benmansour.github.io/it-shore-website/ia/parlons-ia.html
-- Contact : https://youssef-benmansour.github.io/it-shore-website/contact/contact.html
+- Accueil : https://it-shore.com/
+- Parlons IA (services IA, exemples de cas d'usage, FAQ) : https://it-shore.com/ia/parlons-ia.html
+- Contact : https://it-shore.com/contact/contact.html
 
 ## Contact
 - Email : contact@it-shore.com

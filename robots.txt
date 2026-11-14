@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://youssef-benmansour.github.io/it-shore-website/sitemap.xml
+Sitemap: https://it-shore.com/sitemap.xml
